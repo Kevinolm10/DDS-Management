@@ -91,6 +91,15 @@ section {
     z-index: 1000;
 }
 
+.scroll-hint a {
+    display: block;
+    text-decoration: none;
+    color: #333;
+    font-size: 12px;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
 .scroll-hint .arrow {
     width: 20px;
     height: 20px;
