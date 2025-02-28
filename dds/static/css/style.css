@@ -21,6 +21,14 @@ nav {
     align-items: center;
 }
 
+.dds-logo {
+    display: flex;
+    align-items: center;
+    height: 150px;
+    width: 150px;
+    gap: 150px;
+}
+
 h1 {
     font-size: 1.5em;
     width: 80%;
@@ -29,9 +37,9 @@ h1 {
 
 ul {
     display: flex;
-    width: 80%;
+    margin-right: 300px;
     justify-content: flex-end;
-    gap: 10px;
+    gap: 20px;
 }
 
 li {
@@ -40,8 +48,12 @@ li {
 }
 
 a {
-    text-decoration: none;
-    color: white;
+    font-size: 20px;
+}
+
+.s-bar {
+    margin-left: 300px;
+    font-size: 20px;
 }
 
 /* Hero section */
