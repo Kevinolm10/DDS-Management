@@ -1,7 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
     const scrollBtn = document.getElementById('scroll-btn');
-    const sections = document.querySelectorAll('section'); // All sections
-    let currentSection = 0; // Track which section the user is on
+    const sections = document.querySelectorAll('section');
+    const navLinks = document.querySelectorAll('nav ul li a');
+    let currentSection = 0;
 
     // Update button text based on the current section
     function updateButtonText() {
@@ -16,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
             sections[currentSection].scrollIntoView({
                 behavior: 'smooth'
             });
-            updateButtonText(); // Update button text after scroll
+            updateButtonText();
         }
     }
 
@@ -27,18 +28,18 @@ document.addEventListener('DOMContentLoaded', () => {
             sections[currentSection].scrollIntoView({
                 behavior: 'smooth'
             });
-            updateButtonText(); // Update button text after scroll
+            updateButtonText();
         }
     }
 
     // Handle button click event to scroll up or down
     scrollBtn.addEventListener('click', (e) => {
-        e.preventDefault(); // Prevent the default anchor action
+        e.preventDefault();
 
         if (currentSection === sections.length - 1) {
-            scrollToPreviousSection(); // Scroll up if at the last section
+            scrollToPreviousSection();
         } else {
-            scrollToNextSection(); // Scroll down to the next section
+            scrollToNextSection();
         }
     });
 
@@ -53,7 +54,25 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        updateButtonText(); // Update button text based on scroll position
+        updateButtonText();
+    });
+
+    // Add click event listener to the navigation links for smooth scrolling
+    navLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+
+            const targetId = link.getAttribute('data-target');
+            const targetSection = document.getElementById(targetId);
+
+            targetSection.scrollIntoView({
+                behavior: 'smooth'
+            });
+
+            // Update current section index based on the section ID
+            currentSection = Array.from(sections).findIndex(section => section.id === targetId);
+            updateButtonText();
+        });
     });
 
     // Initialize button text on page load
