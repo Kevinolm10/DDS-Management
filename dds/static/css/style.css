@@ -40,15 +40,26 @@ nav {
     gap: 150px;
 }
 
-h1 {
-    font-size: 1.5em;
-    width: 80%;
-    justify-content: flex-start;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+}
+
+p {
+    font-size: 1em;
+    font-weight: 400;
+    font-family: 'Oswald',
+        sans-serif;
 }
 
 ul {
     display: flex;
-    margin-right: 300px;
+    margin-right: 320px;
     justify-content: flex-end;
     gap: 20px;
 }
@@ -56,17 +67,41 @@ ul {
 li {
     list-style-type: none;
     gap: 1em;
+    font-family: 'Oswald',
+        sans-serif;
+    font-weight: 400;
 }
 
 a {
     font-size: 17px;
     color: var(--primary-color);
+    font-family: 'Oswald',
+        sans-serif;
+    font-weight: 400;
 }
 
+/* Search bar styling */
 .s-bar {
+    font-size: 16px;
+    padding: 5px 10px;
+    border: 1px solid var(--secondary-color);
+    border-radius: 30px;
+    outline: none;
+    background-color: #f4f4f4;
+    color: var(--secondary-color);
     margin-left: 300px;
-    font-size: 17wpx;
+    transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out, background-color 0.3s ease-in-out;
+    box-sizing: border-box;
 }
+
+/* Focus effect */
+.s-bar:focus {
+    border-color: var(--tertiary-color);
+    background-color: #fff;
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+    color: var(--tertiary-color);
+}
+
 
 /* Hero section */
 section {
@@ -102,6 +137,7 @@ section img {
     height: 500px;
     border-radius: 5%;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    filter: grayscale(100%);
 }
 
 .agent-info {
@@ -118,12 +154,14 @@ section img {
     align-items: center;
 }
 
+/* blog section */
 #blog {
     height: 100vh;
     background-color: var(--secondary-color);
     color: white;
 }
 
+/* contact section */
 #contact-us {
     height: 100vh;
     background-color: white;
@@ -162,7 +200,7 @@ form {
     width: 100%;
     padding: 10px;
     font-size: 16px;
-    background-color: var(--quaternary-color);
+    background-color: var(--secondary-color);
     color: white;
     cursor: pointer;
 }
