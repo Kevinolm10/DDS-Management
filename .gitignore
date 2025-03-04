@@ -1,0 +1,10 @@
+# Docker files
+Dockerfile
+docker-compose.yml
+.dockerignore
+
+# Docker Compose override files (if you use them)
+docker-compose.override.yml
+
+# Optional: Add any files or directories that Docker might generate
+docker-compose*.yml
