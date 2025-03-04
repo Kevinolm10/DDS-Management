@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+<main>
+    <section id="about" class="section">
+        <div class="heading">
+            <h2>Our team</h2>
+            <section class="agents-container">
+                <!-- Agent 1 -->
+                <section class="agent agent-top-left">
+                    <div class="agent-info">
+                        <img src="{% static 'img/test-agent.jpg' %}" alt="Agent 1">
+                        <h3>David Johnson</h3>
+                        <p>Age: 51</p>
+                        <p>David is an experienced football agent with over 15 years in the sports industry. He
+                            represents top-tier
+                            football players, specializing in contract negotiations and transfers. His reputation
+                            for securing
+                            high-value deals has made him a trusted name in the world of football. David has strong
+                            relationships
+                            with clubs, managers, and sponsors, helping his clients maximize their career potential
+                            both on and off
+                            the field.</p>
+                    </div>
+                </section>
+                <!-- Agent 2 -->
+                <section class="agent agent-bottom-right">
+                    <div class="agent-info">
+                        <img src="{% static 'img/6.jpg' %}" alt="Agent 2">
+                        <h3>Sarah Williams</h3>
+                        <p>Age: 31</p>
+                        <p>Sarah is a highly respected football agent known for her sharp negotiation skills and
+                            extensive network
+                            in the international football scene. She has successfully negotiated multi-million-pound
+                            contracts for
+                            her clients and helped several players secure transfers to major clubs in Europe. Sarah
+                            is dedicated to
+                            building long-term relationships with players, ensuring they not only secure lucrative
+                            deals but also
+                            maintain a healthy career path with post-retirement planning.</p>
+                    </div>
+                </section>
+            </section>
+    </section>
+    </section>
+    </div>
+    </section>
+
+
+
+    <section id="blog" class="section">
+        <div class="container">
+            <h2>Blog</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+        </div>
+    </section>
+
+    <section id="contact-us" class="section">
+        <div class="container">
+            <h2>Contact us</h2>
+            <form action="POST">
+                <input type="text" class="input-contact" name="First-name" placeholder="First name">
+                <input type="text" class="input-contact" name="Last-name" placeholder="Last name">
+                <input type="email" class="input-contact" name="email" placeholder="Email">
+                <textarea name="message" class="messagebox" placeholder="Message"></textarea>
+                <button type="submit" class="contact-btn">Send</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Scroll Button -->
+    <div class="scroll-hint">
+        <a href="javascript:void(0);" id="scroll-btn">Scroll down!</a> <!-- Prevents page reload -->
+        <div class="arrow"></div>
+    </div>
+</main>
+{% endblock %}
