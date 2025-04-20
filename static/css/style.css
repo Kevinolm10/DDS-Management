@@ -7,7 +7,6 @@
 html,
 body {
     max-width: 100%;
-    overflow-x: hidden;
 }
 
 :root {
@@ -360,10 +359,10 @@ footer a:hover {
 }
 
 @media (max-width: 768px) {
-        nav {
-            flex-direction: column;
-            align-items: center;
-        }
+    nav {
+        flex-direction: column;
+        align-items: center;
+    }
 
     .s-bar {
         display: none;
@@ -397,7 +396,7 @@ footer a:hover {
         height: 10px;
     }
 
-    .s-bar{
+    .s-bar {
         display: none;
     }
 
