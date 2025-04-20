@@ -1,3 +1,4 @@
+
 {% extends 'base.html' %}
 
 {% load static %}
@@ -14,7 +15,7 @@
                         <img src="{% static 'img/test-agent.jpg' %}" alt="Agent 1">
                         <h3>David Johnson</h3>
                         <p>Age: 51</p>
-                        <p>David is an experienced football agent with over 15 years in the sports industry. He
+                        <p class="agent-description">David is an experienced football agent with over 15 years in the sports industry. He
                             represents top-tier
                             football players, specializing in contract negotiations and transfers. His reputation
                             for securing
@@ -31,7 +32,8 @@
                         <img src="{% static 'img/6.jpg' %}" alt="Agent 2">
                         <h3>Sarah Williams</h3>
                         <p>Age: 31</p>
-                        <p>Sarah is a highly respected football agent known for her sharp negotiation skills and
+                        <p class="agent-description">Sarah is a highly respected football agent known for her sharp
+                            negotiation skills and
                             extensive network
                             in the international football scene. She has successfully negotiated multi-million-pound
                             contracts for
@@ -72,7 +74,7 @@
 
     <!-- Scroll Button -->
     <div class="scroll-hint">
-        <a href="javascript:void(0);" id="scroll-btn">Scroll down!</a> <!-- Prevents page reload -->
+        <a href="javascript:void(0);" id="scroll-btn"></a> <!-- Prevents page reload -->
         <div class="arrow"></div>
     </div>
 </main>

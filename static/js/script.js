@@ -4,60 +4,67 @@ document.addEventListener('DOMContentLoaded', () => {
     const navLinks = document.querySelectorAll('nav ul li a');
     let currentSection = 0;
 
-    // Update button text based on the current section
-    function updateButtonText() {
+    // Update button visibility based on the current section
+    function updateButtonVisibility() {
         const isAtEnd = currentSection === sections.length - 1;
-        scrollBtn.innerHTML = isAtEnd ? "Scroll up!" : "Scroll down!";
+
+        if (isAtEnd) {
+            scrollBtn.classList.add('hidden');
+        } else {
+            scrollBtn.classList.remove('hidden');
+        }
     }
 
-    // Function to scroll to the next section
+    // Scroll to the next section
     function scrollToNextSection() {
         if (currentSection < sections.length - 1) {
             currentSection++;
             sections[currentSection].scrollIntoView({
                 behavior: 'smooth'
             });
-            updateButtonText();
+            updateButtonVisibility();
         }
     }
 
-    // Function to scroll to the previous section
-    function scrollToPreviousSection() {
-        if (currentSection > 0) {
-            currentSection--;
-            sections[currentSection].scrollIntoView({
-                behavior: 'smooth'
-            });
-            updateButtonText();
-        }
+    // Scroll to the top of the page
+    function scrollToTop() {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+        currentSection = 0;
+        updateButtonVisibility();
     }
 
-    // Handle button click event to scroll up or down
+    // Button click handler
     scrollBtn.addEventListener('click', (e) => {
         e.preventDefault();
 
         if (currentSection === sections.length - 1) {
-            scrollToPreviousSection();
+            scrollToTop();
         } else {
             scrollToNextSection();
         }
     });
 
-    // Handle manual scrolling and update the button text
+    // Update section index on scroll
     window.addEventListener('scroll', () => {
         const scrollPosition = window.scrollY;
         const sectionHeight = window.innerHeight / 2;
 
         sections.forEach((section, index) => {
-            if (scrollPosition >= section.offsetTop - sectionHeight && scrollPosition < section.offsetTop + section.offsetHeight - sectionHeight) {
+            if (
+                scrollPosition >= section.offsetTop - sectionHeight &&
+                scrollPosition < section.offsetTop + section.offsetHeight - sectionHeight
+            ) {
                 currentSection = index;
             }
         });
 
-        updateButtonText();
+        updateButtonVisibility();
     });
 
-    // Add click event listener to the navigation links for smooth scrolling
+    // Smooth scroll via nav links
     navLinks.forEach(link => {
         link.addEventListener('click', (e) => {
             e.preventDefault();
@@ -69,12 +76,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 behavior: 'smooth'
             });
 
-            // Update current section index based on the section ID
             currentSection = Array.from(sections).findIndex(section => section.id === targetId);
-            updateButtonText();
+            updateButtonVisibility();
         });
     });
 
-    // Initialize button text on page load
-    updateButtonText();
+    // Initial setup
+    updateButtonVisibility();
 });
