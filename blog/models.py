@@ -1,8 +1,9 @@
 import cloudinary
+import uuid
 from django.db import models
 
-# Create your models here.
-class post(models.Model):
+class Post(models.Model):
+    post_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)  # Unique UUID field
     image = cloudinary.models.CloudinaryField('image')
     title = models.CharField(max_length=200)
     content = models.TextField()

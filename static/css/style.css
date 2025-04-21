@@ -154,7 +154,6 @@ section img {
     width: 100%;
     max-width: 400px;
     height: auto;
-    border-radius: 5%;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
     filter: grayscale(100%);
 }
@@ -166,13 +165,77 @@ section img {
     align-items: center;
 }
 
-/* blog section */
+/* Blog Section */
 #blog {
     min-height: 100vh;
     background-color: var(--secondary-color);
     color: white;
     width: 100%;
 }
+
+.blog-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    /* Start with one card per row */
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+/* Style for each blog card */
+.blog-card {
+    background: black;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(131, 131, 131, 0.2);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease;
+}
+
+/* Hover effect for blog card */
+.blog-card:hover {
+    transform: translateY(-5px);
+}
+
+/* Blog card image styling */
+.blog-card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+}
+
+/* Blog card content styling */
+.blog-card-content {
+    padding: 1rem;
+}
+
+/* Title of the blog card */
+.blog-card-content h3 {
+    margin-top: 0;
+}
+
+/* Snippet of the blog content */
+.blog-snippet {
+    color: #fff;
+    margin: 0.5rem 0 1rem;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    word-break: break-word;
+    white-space: normal;
+}
+
+/* Read more link style */
+.read-more {
+    text-decoration: none;
+    color: #007BFF;
+    font-weight: bold;
+}
+
+.read-more:hover {
+    text-decoration: underline;
+}
+
+
 
 /* contact section */
 #contact-us {

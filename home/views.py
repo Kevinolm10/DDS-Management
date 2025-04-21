@@ -1,7 +1,8 @@
 from django.shortcuts import render
 
-# Create your views here.
+from blog.models import Post  # Use capital P for consistency
+
 
 def home(request):
-    """ Home page view """
-    return render(request, 'home/home.html')
+    posts = Post.objects.all()
+    return render(request, 'home/home.html', {'posts': posts})

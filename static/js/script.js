@@ -84,3 +84,4 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initial setup
     updateButtonVisibility();
 });
+

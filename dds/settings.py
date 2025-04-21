@@ -12,9 +12,9 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 from pathlib import Path
 import os
-
-from dotenv import load_dotenv
-load_dotenv()  # Loads variables from .env into the environment
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -25,7 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.getenv('SECRET_KEY')
+SECRET_KEY = 'django-insecure-$6z#_dj-hts069q^-sofao(953g0z0^*zvu1a2*7_wu#pbaf5i'
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -48,6 +48,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'crispy_forms',
     'home',
+    'cloudinary',
+    'cloudinary_storage',
+    'blog',
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
@@ -88,14 +91,11 @@ WSGI_APPLICATION = 'dds.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'mydb',
-        'USER': 'postgres',
-        'PASSWORD': 'password',
-        'HOST': 'db',  # This should match the service name in the docker-compose.yml
-        'PORT': '5432',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',  # SQLite-databas lagras lokalt
     }
 }
+
 
 
 
@@ -143,7 +143,23 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': 'dfwppjhlw',
+    'API_KEY': '784571988896656',
+    'API_SECRET': 'rSg5u4jAn4UZDoXeQt-29oMrJm0',
+}
+
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+
+cloudinary.config(
+    cloud_name=CLOUDINARY_STORAGE['CLOUD_NAME'],
+    api_key=CLOUDINARY_STORAGE['API_KEY'],
+    api_secret=CLOUDINARY_STORAGE['API_SECRET']
+)
