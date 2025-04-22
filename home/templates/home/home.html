@@ -1,4 +1,3 @@
-
 {% extends 'base.html' %}
 
 {% load static %}
@@ -15,7 +14,8 @@
                         <img src="{% static 'img/test-agent.jpg' %}" alt="Agent 1">
                         <h3>David Johnson</h3>
                         <p>Age: 51</p>
-                        <p class="agent-description">David is an experienced football agent with over 15 years in the sports industry. He
+                        <p class="agent-description">David is an experienced football agent with over 15 years in the
+                            sports industry. He
                             represents top-tier
                             football players, specializing in contract negotiations and transfers. His reputation
                             for securing
@@ -53,8 +53,8 @@
 
 
     <div id="blog" class="section">
-        <div class="container">
-            <h2>Blog</h2>
+        <div class="blog-container">
+            <h2 class="blog-head">Blog</h2>
             <div class="blog-grid">
                 {% for post in posts %}
                 <div class="blog-card">
@@ -63,10 +63,10 @@
                         <h3>{{ post.title }}</h3>
                         <p class="blog-date">{{ post.created_at|date:"F j, Y" }}</p>
                         <p class="blog-snippet">{{ post.content|truncatewords:20 }}</p>
-                        <a href="#" class="read-more" data-id="{{ post.id }}" data-title="{{ post.title }}"
-                            data-content="{{ post.content }}">
+                        <button class="read-more" data-id="{{ post.id }}" data-title="{{ post.title }}"
+                            data-content="{{ post.content|escapejs }}">
                             Read more
-                        </a>
+                        </button>
                     </div>
                 </div>
                 {% endfor %}
@@ -75,8 +75,9 @@
     </div>
 
 
+
     <section id="contact-us" class="section">
-        <div class="container">
+        <div class="contact-container">
             <h2>Contact us</h2>
             <form action="POST">
                 <input type="text" class="input-contact" name="First-name" placeholder="First name">
@@ -93,5 +94,69 @@
         <a href="javascript:void(0);" id="scroll-btn"></a> <!-- Prevents page reload -->
         <div class="arrow"></div>
     </div>
+
+    <!-- Blog Post Modal -->
+    <div id="blogModal" class="modal" style="display: none;">
+        <div class="modal-article">
+            <span class="close-button">&times;</span>
+            <img id="modalImage" src="" alt="" class="modal-image" />
+            <h2 id="modalTitle"></h2>
+            <p class="modal-date" id="modalDate"></p>
+            <div id="modalContent">
+                <!-- Content will be injected dynamically by JS -->
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const modal = document.getElementById("blogModal");
+            const modalTitle = document.getElementById("modalTitle");
+            const modalContent = document.getElementById("modalContent");
+            const modalImage = document.getElementById("modalImage");
+            const modalDate = document.getElementById("modalDate");
+            const closeBtn = document.querySelector(".close-button");
+
+            // Loop through all the "Read more" buttons
+            document.querySelectorAll(".read-more").forEach(button => {
+                button.addEventListener("click", function () {
+                    // Set the modal's title
+                    modalTitle.textContent = this.getAttribute("data-title");
+
+                    // Set the modal's content (use innerHTML to render HTML correctly)
+                    modalContent.innerHTML = this.getAttribute("data-content");
+
+                    // Set the modal's image (grab from the current blog card)
+                    modalImage.src = this.closest(".blog-card").querySelector("img").src;
+                    modalImage.alt = this.getAttribute("data-title");
+
+                    // Set the modal's publication date (grab from the current blog card)
+                    modalDate.textContent = this.closest(".blog-card").querySelector(
+                        ".blog-date").textContent;
+
+                    // Display the modal
+                    modal.style.display = "block";
+                });
+            });
+
+            // Close the modal when the close button is clicked
+            closeBtn.onclick = function () {
+                modal.style.display = "none";
+            };
+
+            // Close the modal when clicking outside the modal content
+            window.onclick = function (event) {
+                if (event.target === modal) {
+                    modal.style.display = "none";
+                }
+            };
+        });
+    </script>
+
+
+
 </main>
 {% endblock %}

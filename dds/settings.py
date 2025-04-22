@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'cloudinary',
     'cloudinary_storage',
     'blog',
+    'django_summernote',
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
