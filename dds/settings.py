@@ -155,7 +155,7 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     BASE_DIR / 'static',
 ]
-STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATIC_ROOT = '/var/www/static/'
 
 # Media files (Uploaded files)
 MEDIA_URL = '/media/'
