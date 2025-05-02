@@ -31,10 +31,8 @@ SECRET_KEY = 'django-insecure-$6z#_dj-hts069q^-sofao(953g0z0^*zvu1a2*7_wu#pbaf5i
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [
-    'localhost',
-    '127.0.0.1',
-]
+ALLOWED_HOSTS = ['13.60.172.139', 'localhost', '127.0.0.1']
+
 
 
 # Application definition
@@ -52,6 +50,7 @@ INSTALLED_APPS = [
     'cloudinary_storage',
     'blog',
     'django_summernote',
+    'gunicorn',
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
