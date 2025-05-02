@@ -44,14 +44,19 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'crispy_forms',
+    
+    # Third-party apps
+    'crispy_forms',  # For crispy forms
+    'crispy_bootstrap4',  # If using Bootstrap 4 with crispy-forms
+    'cloudinary',  # For Cloudinary storage
+    'cloudinary_storage',  # For Cloudinary storage management
+    'django_summernote',  # For Summernote (rich text editor)
+    
+    # Your own apps
     'home',
-    'cloudinary',
-    'cloudinary_storage',
     'blog',
-    'django_summernote',
-    'gunicorn',
 ]
+
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
