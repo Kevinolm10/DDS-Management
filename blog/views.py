@@ -1,100 +1,101 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Post
 from django.http import HttpResponse
 
-# Create your views here.
+# Display all posts
 def all_posts(request):
     posts = Post.objects.all()
-    context = {
-        'posts': posts
-    }
+    context = {'posts': posts}
     return render(request, 'blog/all_posts.html', context)
 
+# View details of a single post
 def post_detail(request, post_id):
     try:
         post = Post.objects.get(id=post_id)
     except Post.DoesNotExist:
         return HttpResponse("Post not found", status=404)
-    context = {
-        'post': post
-    }
+    context = {'post': post}
     return render(request, 'blog/post_detail.html', context)
 
+# Create a new post
 def create_post(request):
     if request.method == 'POST':
         title = request.POST.get('title')
         content = request.POST.get('content')
         image = request.FILES.get('image')
+
+        # Create and save the post
         post = Post(title=title, content=content, image=image)
         post.save()
-        return HttpResponse("Post created successfully", status=201)
-    elif request.method == 'GET':
-        # Render a form for creating a new post
-        return render(request, 'blog/create_post.html')
-    else:
-        return HttpResponse("Method not allowed", status=405)
 
+        # Redirect to the created post's detail page
+        return redirect('post_detail', post_id=post.id)
+
+    return render(request, 'blog/create_post.html')
+
+# Update an existing post
 def update_post(request, post_id):
     try:
         post = Post.objects.get(id=post_id)
     except Post.DoesNotExist:
         return HttpResponse("Post not found", status=404)
+
     if request.method == 'POST':
         title = request.POST.get('title')
         content = request.POST.get('content')
         image = request.FILES.get('image')
+
         post.title = title
         post.content = content
         if image:
             post.image = image
-        post.save()  # Fixed the call to `save()` (was using `Post.save()` incorrectly)
-        return HttpResponse("Post updated successfully", status=200)
-    elif request.method == 'GET':
-        # Render a form for updating the post
-        context = {
-            'post': post
-        }
-        return render(request, 'blog/update_post.html', context)
-    else:
-        return HttpResponse("Method not allowed", status=405)
+        post.save()
 
+        # Redirect to the updated post's detail page
+        return redirect('post_detail', post_id=post.id)
+
+    context = {'post': post}
+    return render(request, 'blog/update_post.html', context)
+
+# Delete a post
 def delete_post(request, post_id):
     try:
-        post = Post.objects.get(id=post_id)  # Fixed the variable name (was `Post = Post.objects.get()` which is incorrect)
+        post = Post.objects.get(id=post_id)
     except Post.DoesNotExist:
         return HttpResponse("Post not found", status=404)
-    if request.method == 'POST':
-        post.delete()  # Fixed the delete operation (was `Post.delete()` which is incorrect)
-        return HttpResponse("Post deleted successfully", status=200)
-    elif request.method == 'GET':
-        # Render a confirmation page for deleting the post
-        context = {
-            'post': post  # Fixed the variable name (was `Post` instead of `post`)
-        }
-        return render(request, 'blog/delete_post.html', context)
-    else:
-        return HttpResponse("Method not allowed", status=405)
 
+    if request.method == 'POST':
+        post.delete()
+        # Redirect to all posts page after deletion
+        return redirect('all_posts')
+
+    context = {'post': post}
+    return render(request, 'blog/delete_post.html', context)
+
+# Search posts by title
 def search_posts(request):
-    query = request.GET.get('q')
+    query = request.GET.get('q', '')
     if query:
-        posts = Post.objects.filter(title__icontains=query)  # Fixed the variable name (was `Posts` instead of `posts`)
+        posts = Post.objects.filter(title__icontains=query)
     else:
         posts = Post.objects.all()
+
     context = {
-        'posts': posts,  # Fixed the variable name (was `Posts` instead of `posts`)
+        'posts': posts,
         'query': query
     }
     return render(request, 'blog/search_posts.html', context)
 
+# Filter posts by creation date
 def filter_posts_by_date(request):
     date = request.GET.get('date')
     if date:
-        posts = Post.objects.filter(created_at__date=date)  # Fixed the variable name (was `Posts` instead of `posts`)
+        posts = Post.objects.filter(created_at__date=date)
     else:
         posts = Post.objects.all()
+
     context = {
-        'posts': posts,  # Fixed the variable name (was `Posts` instead of `posts`)
+        'posts': posts,
         'date': date
-    }   
+    }
     return render(request, 'blog/filter_posts_by_date.html', context)

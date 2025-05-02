@@ -324,36 +324,6 @@ section img {
     width: 100%;
 }
 
-form {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    width: 100%;
-    max-width: 700px;
-}
-
-.input-contact {
-    width: 100%;
-    padding: 10px;
-    font-size: 16px;
-}
-
-.messagebox {
-    width: 100%;
-    padding: 20px;
-    font-size: 16px;
-    height: 200px;
-    resize: vertical;
-}
-
-.contact-btn {
-    width: 100%;
-    padding: 10px;
-    font-size: 16px;
-    background-color: var(--secondary-color);
-    color: white;
-    cursor: pointer;
-}
 
 /* Scroll Hint */
 .scroll-hint {

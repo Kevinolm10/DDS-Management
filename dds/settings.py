@@ -91,11 +91,24 @@ WSGI_APPLICATION = 'dds.wsgi.application'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 DATABASES = {
+
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',  # SQLite-databas lagras lokalt
+
+        'ENGINE': 'django.db.backends.postgresql',
+
+        'NAME': 'DDS_Management',
+
+        'USER': 'ddsMgmt',
+
+        'PASSWORD': 'Sommar2025_',
+
+        'HOST': 'database-1.cvicouoam7in.eu-north-1.rds.amazonaws.com',
+
+        'PORT': '5432',
     }
 }
+
+
 
 
 
