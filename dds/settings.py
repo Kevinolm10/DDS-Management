@@ -182,3 +182,5 @@ cloudinary.config(
     api_key=CLOUDINARY_STORAGE['API_KEY'],
     api_secret=CLOUDINARY_STORAGE['API_SECRET']
 )
+
+X_FRAME_OPTIONS = 'SAMEORIGIN'

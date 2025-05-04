@@ -5,4 +5,4 @@ from blog.models import Post  # Use capital P for consistency
 
 def home(request):
     posts = Post.objects.all()
-    return render(request, 'home/home.html', {'Posts': posts})
+    return render(request, 'home/home.html', {'posts': posts})
