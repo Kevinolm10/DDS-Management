@@ -148,6 +148,7 @@ USE_I18N = True
 USE_TZ = True
 
 
+<<<<<<< HEAD
 
 
 
@@ -155,6 +156,14 @@ STATIC_URL = '/static/'  # This should be the public-facing URL
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')  # This is where `collectstatic` will store the files
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'staticfiles'),  # Directories where you want static files to be collected from
+=======
+# Static files (CSS, JavaScript, Images)
+
+STATIC_URL = '/static/'  # This should be the public-facing URL
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # This is where `collectstatic` will store the files
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),  # Directories where you want static files to be collected from
+>>>>>>> origin/main
 ]
 
 
