@@ -151,11 +151,15 @@ USE_TZ = True
 
 
 
-STATIC_URL = '/static/'  # This should be the public-facing URL
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')  # This is where `collectstatic` will store the files
+STATIC_URL = '/static/'  # The URL where static files will be served
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # The directory to collect static files (for production)
+
+# Directories to look for static files during development
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'staticfiles'),  # Directories where you want static files to be collected from
+    os.path.join(BASE_DIR, 'static'),  # Your actual static directory where files like CSS are located
 ]
+
+
 
 
 # Media files (Uploaded files)

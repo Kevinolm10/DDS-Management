@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% load static %}
+<link rel="stylesheet" href="{% static 'css/styles.css' %}">
 
 {% block content %}
 <main>
@@ -15,15 +16,11 @@
                         <h3>David Johnson</h3>
                         <p>Age: 51</p>
                         <p class="agent-description">David is an experienced football agent with over 15 years in the
-                            sports industry. He
-                            represents top-tier
-                            football players, specializing in contract negotiations and transfers. His reputation
-                            for securing
-                            high-value deals has made him a trusted name in the world of football. David has strong
-                            relationships
-                            with clubs, managers, and sponsors, helping his clients maximize their career potential
-                            both on and off
-                            the field.</p>
+                            sports industry. He represents top-tier football players, specializing in contract
+                            negotiations and transfers. His reputation for securing high-value deals has made him a
+                            trusted name in the world of football. David has strong relationships with clubs, managers,
+                            and sponsors, helping his clients maximize their career potential both on and off the field.
+                        </p>
                     </div>
                 </section>
                 <!-- Agent 2 -->
@@ -33,24 +30,16 @@
                         <h3>Sarah Williams</h3>
                         <p>Age: 31</p>
                         <p class="agent-description">Sarah is a highly respected football agent known for her sharp
-                            negotiation skills and
-                            extensive network
-                            in the international football scene. She has successfully negotiated multi-million-pound
-                            contracts for
-                            her clients and helped several players secure transfers to major clubs in Europe. Sarah
-                            is dedicated to
-                            building long-term relationships with players, ensuring they not only secure lucrative
-                            deals but also
-                            maintain a healthy career path with post-retirement planning.</p>
+                            negotiation skills and extensive network in the international football scene. She has
+                            successfully negotiated multi-million-pound contracts for her clients and helped several
+                            players secure transfers to major clubs in Europe. Sarah is dedicated to building long-term
+                            relationships with players, ensuring they not only secure lucrative deals but also maintain
+                            a healthy career path with post-retirement planning.</p>
                     </div>
                 </section>
             </section>
+        </div>
     </section>
-    </section>
-    </div>
-    </section>
-
-
 
     <div id="blog" class="section">
         <div class="blog-container">
@@ -62,9 +51,10 @@
                     <div class="blog-card-content">
                         <h3>{{ post.title }}</h3>
                         <p class="blog-date">{{ post.created_at|date:"F j, Y" }}</p>
-                        <p class="blog-snippet">{{ post.content|truncatewords:20 }}</p>
+                        <p class="blog-snippet">{{ post.content|truncatewords:20|safe }}</p>
+                        <!-- Use the 'safe' filter here -->
                         <button class="read-more" data-id="{{ post.id }}" data-title="{{ post.title }}"
-                            data-content="{{ post.content|escapejs }}">
+                            data-content="{{ post.content }}">
                             Read more
                         </button>
                     </div>
@@ -74,27 +64,36 @@
         </div>
     </div>
 
-
-
     <section id="contact-us" class="section">
-        <div class="contact-container">
-            <h2 class="contact-head">Contact Us</h2>
-            <section class="contact-form">
-                <form action="#" method="post">
-                    {% csrf_token %}
-                    <input type="text" name="name" placeholder="Your Name" required>
-                    <input type="email" name="email" placeholder="Your Email" required>
-                    <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
-                    <button type="submit">Send</button>
-                </form>
-            </section>
+        <div class="contact-form-container">
+            <h2 class="contact-form-title">Contact Us</h2>
+            <form action="/submit-form" method="POST" class="contact-form">
+                <!-- Name Field -->
+                <div class="form-group">
+                    <label for="name" class="form-label">Full Name</label>
+                    <input type="text" id="name" name="name" class="input-field" placeholder="Your full name" required>
+                </div>
+
+                <!-- Email Field -->
+                <div class="content">
+                    <label for="email" class="form-label">Email Address</label>
+                    <input type="email" id="email" name="email" class="input-field" placeholder="Your email address"
+                        required>
+                </div>
+
+                <!-- Message Field -->
+                <div class="content">
+                    <label for="message" class="form-label">Your Message</label>
+                    <textarea id="message" name="message" class="input-field" placeholder="Write your message here"
+                        rows="4" required></textarea>
+                </div>
+
+                <!-- Submit Button -->
+                <div class="content">
+                    <button type="submit" class="submit-button">Send Message</button>
+                </div>
+            </form>
         </div>
-
-    </section>
-
-
-
-
     </section>
 
     <!-- Scroll Button -->
@@ -115,9 +114,6 @@
             </div>
         </div>
     </div>
-
-
-
 
     <script>
         document.addEventListener("DOMContentLoaded", function () {
@@ -163,8 +159,6 @@
             };
         });
     </script>
-
-
 
 </main>
 {% endblock %}
