@@ -2,9 +2,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const scrollBtn = document.getElementById('scroll-btn');
     const sections = document.querySelectorAll('section');
     const navLinks = document.querySelectorAll('nav ul li a');
+    const header = document.querySelector('header'); // Hämta headern
+    const headerHeight = header.offsetHeight; // Hämta headerns höjd
+
     let currentSection = 0;
 
-    // Update button visibility based on the current section
+    // Uppdatera knappens synlighet baserat på den aktuella sektionen
     function updateButtonVisibility() {
         const isAtEnd = currentSection === sections.length - 1;
 
@@ -15,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Scroll to the next section
+    // Scrolla till nästa sektion
     function scrollToNextSection() {
         if (currentSection < sections.length - 1) {
             currentSection++;
@@ -26,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Scroll to the top of the page
+    // Scrolla till toppen av sidan
     function scrollToTop() {
         window.scrollTo({
             top: 0,
@@ -47,7 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Update section index on scroll
+    // Uppdatera sektionens index när man scrollar
     window.addEventListener('scroll', () => {
         const scrollPosition = window.scrollY;
         const sectionHeight = window.innerHeight / 2;
@@ -64,7 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
         updateButtonVisibility();
     });
 
-    // Smooth scroll via nav links
+    // Smidig scroll när man klickar på navigeringslänkar
     navLinks.forEach(link => {
         link.addEventListener('click', (e) => {
             e.preventDefault();
@@ -72,7 +75,9 @@ document.addEventListener('DOMContentLoaded', () => {
             const targetId = link.getAttribute('data-target');
             const targetSection = document.getElementById(targetId);
 
-            targetSection.scrollIntoView({
+            // Scrolla till sektionen och ta hänsyn till headerns höjd
+            window.scrollTo({
+                top: targetSection.offsetTop - headerHeight, // Subtrahera headerns höjd för korrekt position
                 behavior: 'smooth'
             });
 
@@ -84,4 +89,3 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initial setup
     updateButtonVisibility();
 });
-
