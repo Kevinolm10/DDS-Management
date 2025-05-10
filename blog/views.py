@@ -1,12 +1,7 @@
 from django.shortcuts import render, redirect
 from .models import Post
 from django.http import HttpResponse
-
-# Display all posts
-def all_posts(request):
-    posts = Post.objects.all()
-    context = {'posts': posts}
-    return render(request, 'blog/all_posts.html', context)
+from django.core.paginator import Paginator
 
 # View details of a single post
 def post_detail(request, post_id):
