@@ -5,7 +5,7 @@
 
 {% block content %}
 <main>
-    <section id="about" class="section">
+    <section id="our-team" class="section">
         <div class="heading">
             <h2>Our team</h2>
             <section class="agents-container">
@@ -41,6 +41,37 @@
         </div>
     </section>
 
+<section id="about" class="section">
+    <h2 class="about-head">About Us</h2>
+    <div class="about-container">
+        <p class="about-description">
+            We are a leading football agency dedicated to representing and managing the
+            careers of professional football players. Our team of experienced agents works
+            tirelessly to secure the best contracts, endorsements, and opportunities for our clients.
+        </p>
+        <section class="content-wrapper">
+            <div class="content-box">At the core of our agency is a deep commitment to representing footballers with
+                integrity, expertise, and passion. We work closely with each player to understand their individual
+                ambitions, whether it’s securing a move to a top-tier club, negotiating better terms, or planning a
+                long-term career strategy. Our agents are experienced negotiators who handle all aspects of contracts
+                and transfers with precision and professionalism. We take pride in being more than just intermediaries –
+                we are trusted advisors who stand by our clients in every step of their journey. From contract renewals
+                and performance bonuses to legal support and career transitions, our representation is tailored,
+                proactive, and built on trust. Our goal is to create lasting relationships that prioritize the player’s
+                best interests, both on and off the field.</div>
+            <div class="content-box">Our approach to career development goes far beyond what happens during the 90
+                minutes on the pitch. We believe that a successful football career is built on preparation, support, and
+                the ability to adapt. That’s why we provide our clients with access to a comprehensive network of
+                professionals – including fitness coaches, mental performance specialists, nutritionists, and media
+                consultants. Whether a player is rising through the ranks or already established, we ensure they have
+                the tools and guidance needed to thrive. We also focus on life beyond football, offering mentoring,
+                financial planning, and post-retirement transition support. By focusing on the full person behind the
+                player, we help our clients build meaningful, sustainable careers that last well beyond the game. Our
+                mission is to prepare athletes for every opportunity – and every challenge – that comes their way.</div>
+        </section>
+    </div>
+</section>
+
     <div id="blog" class="section">
         <div class="blog-container">
             <h2 class="blog-head">Blog</h2>
@@ -61,8 +92,25 @@
                 </div>
                 {% endfor %}
             </div>
-        </div>
-    </div>
+                    <div class="pagination">
+                        {% if posts.has_previous %}
+                        <a href="?page={{ posts.previous_page_number }}#blog" class="page-link">Previous</a>
+                        {% endif %}
+
+                        {% for num in posts.paginator.page_range %}
+                        {% if posts.number == num %}
+                        <span class="current-page">{{ num }}</span>
+                        {% else %}
+                        <a href="?page={{ num }}#blog" class="page-link">{{ num }}</a>
+                        {% endif %}
+                        {% endfor %}
+
+                        {% if posts.has_next %}
+                        <a href="?page={{ posts.next_page_number }}#blog" class="page-link">Next</a>
+                        {% endif %}
+                    </div>
+                    </div>
+                    </div>
 
     <section id="contact-us" class="section">
         <div class="contact-form-container">
