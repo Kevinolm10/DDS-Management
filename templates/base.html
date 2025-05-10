@@ -6,59 +6,86 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Bootstrap css -->
+
+    <!-- SEO Meta Tags -->
+    <title>DDS Management | Expert Business Consulting Services</title>
+ <meta name="description"
+     content="DDS Management is a leading football agency, specializing in career management, contract negotiations, and transfers for professional football players. Our expert team ensures players maximize their potential both on and off the field.">
+ <meta name="keywords"
+     content="football agency, football agents, player management, contract negotiations, football transfers, football career development, player representation, sports agent, football endorsements, athlete career management, professional football, football players">
+
+    <meta name="author" content="DDS Management">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:title" content="DDS Management | Expert Business Consulting Services">
+    <meta property="og:description"
+        content="Grow your business with tailored strategies from DDS Management's expert consultants.">
+    <meta property="og:image" content="{% static 'img/dds-mgmt1.png' %}">
+    <meta property="og:url" content="{{ request.build_absolute_uri }}">
+    <meta property="og:type" content="website">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="DDS Management | Expert Business Consulting Services">
+    <meta name="twitter:description"
+        content="Grow your business with tailored strategies from DDS Management's expert consultants.">
+    <meta name="twitter:image" content="{% static 'img/dds-mgmt1.png' %}">
+
+    <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <!-- Font Awesome css -->
+    <!-- Font Awesome CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <!-- Custom css -->
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-    <!-- Google fonts -->
+    <!-- Google Fonts -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&display=swap">
-    <title>DDS-Management</title>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 
 <body>
-    <header>
-        <nav>
-            <input type="text" class="s-bar" placeholder="Search..">
-            <a href="{% url 'home' %}"><img src="{% static 'img/dds-mgmt1.png' %}" class="dds-logo"
-                    alt="DDS Management Logo"></a>
+    <header role="banner">
+        <nav role="navigation" aria-label="Main navigation">
+            <input type="text" class="s-bar" placeholder="Search.." aria-label="Search the site">
+            <a href="{% url 'home' %}">
+                <img src="{% static 'img/dds-mgmt1.png' %}" class="dds-logo" alt="DDS Management Logo">
+            </a>
             <ul>
-                <li><a href="#" data-target="our-team">Our Team</a></li>
-                <li><a href="#" data-target="about">About-us</a></li>
-                <li><a href="#" data-target="blog">Blog</a></li>
-                <li><a href="#" data-target="contact-us">Contact us</a></li>
+                <li><a href="#" data-target="our-team" aria-label="Go to Our Team section">Our Team</a></li>
+                <li><a href="#" data-target="about" aria-label="Learn more About Us">About Us</a></li>
+                <li><a href="#" data-target="blog" aria-label="Read our Blog">Blog</a></li>
+                <li><a href="#" data-target="contact-us" aria-label="Contact DDS Management">Contact Us</a></li>
             </ul>
         </nav>
-
     </header>
 
-    <main>
+    <main role="main">
         {% block content %}
         {% endblock %}
     </main>
 
-    <footer>
+    <footer role="contentinfo">
         <div class="footer-section">
             <div>
                 <h3>DDS Management</h3>
                 <p class="social-media-cta">Find us on social media</p>
             </div>
             <ul>
-                <li><a href="#"><i class="fab fa-facebook"></i></a></li>
-                <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                <li><a href="#"><i class="fab fa-instagram"></i></a></li>
-                <li><a href="#"><i class="fab fa-linkedin"></i></a></li>
+                <li><a href="#" aria-label="Visit our Facebook page"><i class="fab fa-facebook"
+                            aria-hidden="true"></i></a></li>
+                <li><a href="#" aria-label="Visit our Twitter profile"><i class="fab fa-twitter"
+                            aria-hidden="true"></i></a></li>
+                <li><a href="#" aria-label="Visit our Instagram page"><i class="fab fa-instagram"
+                            aria-hidden="true"></i></a></li>
+                <li><a href="#" aria-label="Visit our LinkedIn profile"><i class="fab fa-linkedin"
+                            aria-hidden="true"></i></a></li>
             </ul>
             <div>
-                <p>&copy; 2021 DDS Management</p>
+                <p>&copy; 2021 DDS Management. All rights reserved.</p>
             </div>
         </div>
     </footer>
 
-    <!-- Load JavaScript at the end of the body for better performance -->
-    <script src=" {% static 'js/script.js' %}"></script>
+    <!-- JavaScript -->
+    <script src="{% static 'js/script.js' %}"></script>
 </body>
 
 </html>
