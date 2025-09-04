@@ -1,22 +1,40 @@
 from django.contrib import admin
 from django_summernote.admin import SummernoteModelAdmin
-from .models import Post
+from .models import Post, Category
 
-# Register the Post model in the admin interface with customized settings
+@admin.register(Category)
+class CategoryAdmin(admin.ModelAdmin):
+    list_display = ('name', 'slug', 'created_at')
+    search_fields = ('name', 'description')
+    prepopulated_fields = {'slug': ('name',)}
+    readonly_fields = ('created_at',)
+
 @admin.register(Post)
-class PostAdmin(SummernoteModelAdmin):  # Extend SummernoteModelAdmin to enable Summernote integration
-    list_display = ('image', 'title', 'created_at', 'updated_at')
+class PostAdmin(SummernoteModelAdmin):
+    list_display = ('title', 'category', 'is_featured', 'is_published', 'created_at', 'updated_at')
+    list_filter = ('category', 'is_featured', 'is_published', 'created_at', 'updated_at')
     search_fields = ('title', 'content')
-    list_filter = ('created_at', 'updated_at')
-    date_hierarchy = 'created_at'  # Allows filtering by date
-    ordering = ('-created_at',)  # Orders posts by created_at in descending order
+    prepopulated_fields = {'slug': ('title',)}
+    date_hierarchy = 'created_at'
+    ordering = ('-created_at',)
+    list_editable = ('is_featured', 'is_published')
 
-    summernote_fields = ('content',)  # Add Summernote editor for 'content' field
+    summernote_fields = ('content',)
 
-    # Optional: If you want to use post_id in the admin interface
-    def get_readonly_fields(self, request, obj=None):
-        """Make post_id read-only in admin"""
-        readonly_fields = super().get_readonly_fields(request, obj)
-        if obj:  # If it's an existing post, make post_id read-only
-            readonly_fields = readonly_fields + ('post_id',)
-        return readonly_fields
+    fieldsets = (
+        ('Basic Information', {
+            'fields': ('title', 'slug', 'category', 'image')
+        }),
+        ('Content', {
+            'fields': ('content',)
+        }),
+        ('Settings', {
+            'fields': ('is_featured', 'is_published')
+        }),
+        ('Metadata', {
+            'fields': ('post_id', 'created_at', 'updated_at'),
+            'classes': ('collapse',)
+        })
+    )
+
+    readonly_fields = ('post_id', 'created_at', 'updated_at')

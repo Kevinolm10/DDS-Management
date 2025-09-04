@@ -1,43 +1,130 @@
 {% extends 'base.html' %}
-
 {% load static %}
-<link rel="stylesheet" href="{% static 'css/styles.css' %}">
+
+{% block title %}DDS Management | Premier Football Agency - Expert Player Representation{% endblock %}
+
+{% block description %}DDS Management is a premier football agency representing professional players worldwide. Expert contract negotiations, career management, and transfer services. Contact us for professional football representation.{% endblock %}
+
+{% block keywords %}football agency, football agents, player representation, contract negotiations, football transfers, sports management, professional football, player careers, football contracts, sports agents{% endblock %}
+
+{% block og_title %}DDS Management | Premier Football Agency{% endblock %}
+{% block og_description %}Expert football player representation and career management services. Professional contract negotiations and transfer assistance.{% endblock %}
+
+{% block structured_data %}
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "DDS Management",
+    "description": "Premier football agency providing expert player representation and career management services",
+    "url": "{{ request.build_absolute_uri }}",
+    "logo": "{{ request.scheme }}://{{ request.get_host }}{% static 'img/dds-mgmt1.png' %}",
+    "serviceType": "Sports Management",
+    "areaServed": "Worldwide",
+    "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Football Agency Services",
+        "itemListElement": [
+            {
+                "@type": "Offer",
+                "itemOffered": {
+                    "@type": "Service",
+                    "name": "Contract Negotiations",
+                    "description": "Professional contract negotiation services for football players"
+                }
+            },
+            {
+                "@type": "Offer",
+                "itemOffered": {
+                    "@type": "Service",
+                    "name": "Career Management",
+                    "description": "Comprehensive career planning and development for professional footballers"
+                }
+            },
+            {
+                "@type": "Offer",
+                "itemOffered": {
+                    "@type": "Service",
+                    "name": "Transfer Services",
+                    "description": "Expert assistance with player transfers and club negotiations"
+                }
+            }
+        ]
+    },
+    "employee": [
+        {
+            "@type": "Person",
+            "name": "David Johnson",
+            "jobTitle": "Senior Football Agent",
+            "description": "Experienced football agent with over 15 years in the sports industry"
+        },
+        {
+            "@type": "Person",
+            "name": "Sarah Williams",
+            "jobTitle": "International Football Agent",
+            "description": "Highly respected football agent known for sharp negotiation skills"
+        }
+    ]
+}
+</script>
+{% endblock %}
 
 {% block content %}
 <main>
+    <!-- Our Team Section -->
     <section id="our-team" class="section">
-        <div class="heading">
-            <h2>Our team</h2>
-            <section class="agents-container">
+        <div class="container">
+            <div class="heading">
+                <h2>Our Team</h2>
+            </div>
+            <div class="agents-container">
                 <!-- Agent 1 -->
-                <section class="agent agent-top-left">
+                <article class="agent" itemscope itemtype="https://schema.org/Person">
                     <div class="agent-info">
-                        <img src="{% static 'img/test-agent.jpg' %}" alt="Agent 1">
-                        <h3>David Johnson</h3>
-                        <p>Age: 51</p>
-                        <p class="agent-description">David is an experienced football agent with over 15 years in the
-                            sports industry. He represents top-tier football players, specializing in contract
-                            negotiations and transfers. His reputation for securing high-value deals has made him a
-                            trusted name in the world of football. David has strong relationships with clubs, managers,
-                            and sponsors, helping his clients maximize their career potential both on and off the field.
+                        <img src="{% static 'img/test-agent.jpg' %}"
+                             alt="David Johnson - Senior Football Agent at DDS Management"
+                             itemprop="image"
+                             loading="lazy"
+                             width="200"
+                             height="200">
+                        <h3 itemprop="name">David Johnson</h3>
+                        <p><strong>Age:</strong> <span itemprop="age">51</span> | <strong>Experience:</strong> 15+ Years</p>
+                        <p class="agent-description" itemprop="description">
+                            David is an experienced football agent with over 15 years in the sports industry.
+                            He represents top-tier football players, specializing in contract negotiations and transfers.
+                            His reputation for securing high-value deals has made him a trusted name in the world of football.
+                            David has strong relationships with clubs, managers, and sponsors, helping his clients maximize
+                            their career potential both on and off the field.
                         </p>
+                        <meta itemprop="jobTitle" content="Senior Football Agent">
+                        <meta itemprop="worksFor" content="DDS Management">
                     </div>
-                </section>
+                </article>
+
                 <!-- Agent 2 -->
-                <section class="agent agent-bottom-right">
+                <article class="agent" itemscope itemtype="https://schema.org/Person">
                     <div class="agent-info">
-                        <img src="{% static 'img/6.jpg' %}" alt="Agent 2">
-                        <h3>Sarah Williams</h3>
-                        <p>Age: 31</p>
-                        <p class="agent-description">Sarah is a highly respected football agent known for her sharp
-                            negotiation skills and extensive network in the international football scene. She has
-                            successfully negotiated multi-million-pound contracts for her clients and helped several
-                            players secure transfers to major clubs in Europe. Sarah is dedicated to building long-term
-                            relationships with players, ensuring they not only secure lucrative deals but also maintain
-                            a healthy career path with post-retirement planning.</p>
+                        <img src="{% static 'img/6.jpg' %}"
+                             alt="Sarah Williams - International Football Agent at DDS Management"
+                             itemprop="image"
+                             loading="lazy"
+                             width="200"
+                             height="200">
+                        <h3 itemprop="name">Sarah Williams</h3>
+                        <p><strong>Age:</strong> <span itemprop="age">31</span> | <strong>Experience:</strong> 8+ Years</p>
+                        <p class="agent-description" itemprop="description">
+                            Sarah is a highly respected football agent known for her sharp negotiation skills and
+                            extensive network in the international football scene. She has successfully negotiated
+                            multi-million-pound contracts for her clients and helped several players secure transfers
+                            to major clubs in Europe. Sarah is dedicated to building long-term relationships with players,
+                            ensuring they not only secure lucrative deals but also maintain a healthy career path with
+                            post-retirement planning.
+                        </p>
+                        <meta itemprop="jobTitle" content="International Football Agent">
+                        <meta itemprop="worksFor" content="DDS Management">
                     </div>
-                </section>
-            </section>
+                </article>
+            </div>
         </div>
     </section>
 
@@ -85,141 +172,136 @@
         </div>
     </section>
 
-    <div id="blog" class="section">
-        <div class="blog-container">
-            <h2 class="blog-head">News</h2>
-            <div class="blog-grid">
-                {% for post in posts %}
-                <div class="blog-card">
-                    <img src="{{ post.image.url }}" alt="{{ post.title }}">
-                    <div class="blog-card-content">
-                        <h3>{{ post.title }}</h3>
-                        <p class="blog-date">{{ post.created_at|date:"F j, Y" }}</p>
-                        <p class="blog-snippet">{{ post.content|truncatewords:20|safe }}</p>
-                        <!-- Use the 'safe' filter here -->
-                        <button class="read-more" data-id="{{ post.id }}" data-title="{{ post.title }}"
-                            data-content="{{ post.content }}">
-                            Read more
-                        </button>
-                    </div>
-                </div>
-                {% endfor %}
+    <!-- Blog Section -->
+    <section id="blog" class="section">
+        <div class="container">
+            <div class="blog-head">
+                <h2>Latest News</h2>
             </div>
-            <div class="pagination">
-                {% if posts.has_previous %}
-                <a href="?page={{ posts.previous_page_number }}#blog" class="page-link">Previous</a>
-                {% endif %}
+            <div class="blog-container">
+                <div class="blog-grid">
+                    {% for post in posts %}
+                    <article class="blog-card" itemscope itemtype="https://schema.org/Article">
+                        <img src="{{ post.image.url }}"
+                             alt="{{ post.title }}"
+                             itemprop="image"
+                             loading="lazy"
+                             width="350"
+                             height="250">
+                        <div class="blog-card-content">
+                            <h3 itemprop="headline">{{ post.title }}</h3>
+                            <time class="blog-date" datetime="{{ post.created_at|date:'c' }}" itemprop="datePublished">
+                                {{ post.created_at|date:"F j, Y" }}
+                            </time>
+                            <p class="blog-snippet" itemprop="description">{{ post.content|truncatewords:20|striptags }}</p>
+                            <button class="read-more" data-id="{{ post.post_id }}" data-title="{{ post.title }}"
+                                data-content="{{ post.content }}" data-date="{{ post.created_at|date:'F j, Y' }}"
+                                data-image="{{ post.image.url }}"
+                                aria-label="Read more about {{ post.title }}">
+                                Read More
+                            </button>
+                            <meta itemprop="author" content="DDS Management">
+                            <meta itemprop="publisher" content="DDS Management">
+                        </div>
+                    </article>
+                    {% empty %}
+                    <div class="no-posts">
+                        <p>No news articles available at the moment. Check back soon!</p>
+                    </div>
+                    {% endfor %}
+                </div>
+                <!-- Pagination -->
+                {% if posts.paginator.num_pages > 1 %}
+                <div class="pagination">
+                    {% if posts.has_previous %}
+                    <a href="?page={{ posts.previous_page_number }}#blog" class="page-link" aria-label="Previous page">
+                        <i class="fas fa-chevron-left"></i> Previous
+                    </a>
+                    {% endif %}
 
-                {% for num in posts.paginator.page_range %}
-                {% if posts.number == num %}
-                <span class="current-page">{{ num }}</span>
-                {% else %}
-                <a href="?page={{ num }}#blog" class="page-link">{{ num }}</a>
-                {% endif %}
-                {% endfor %}
+                    {% for num in posts.paginator.page_range %}
+                    {% if posts.number == num %}
+                    <span class="current-page" aria-current="page">{{ num }}</span>
+                    {% else %}
+                    <a href="?page={{ num }}#blog" class="page-link" aria-label="Page {{ num }}">{{ num }}</a>
+                    {% endif %}
+                    {% endfor %}
 
-                {% if posts.has_next %}
-                <a href="?page={{ posts.next_page_number }}#blog" class="page-link">Next</a>
+                    {% if posts.has_next %}
+                    <a href="?page={{ posts.next_page_number }}#blog" class="page-link" aria-label="Next page">
+                        Next <i class="fas fa-chevron-right"></i>
+                    </a>
+                    {% endif %}
+                </div>
                 {% endif %}
             </div>
         </div>
-    </div>
+    </section>
 
+    <!-- Contact Section -->
     <section id="contact-us" class="section">
         <div class="contact-form-container">
             <h2 class="contact-form-title">Contact Us</h2>
-            <form action="/submit-form" method="POST" class="contact-form">
+            <form action="{% url 'contact_submit' %}" method="POST" class="contact-form" id="contact-form">
+                {% csrf_token %}
+
                 <!-- Name Field -->
                 <div class="form-group">
                     <label for="name" class="form-label">Full Name</label>
-                    <input type="text" id="name" name="name" class="input-field" placeholder="Your full name" required>
+                    <input type="text" id="name" name="name" class="input-field"
+                           placeholder="Enter your full name" required>
                 </div>
 
                 <!-- Email Field -->
-                <div class="content">
+                <div class="form-group">
                     <label for="email" class="form-label">Email Address</label>
-                    <input type="email" id="email" name="email" class="input-field" placeholder="Your email address"
-                        required>
+                    <input type="email" id="email" name="email" class="input-field"
+                           placeholder="Enter your email address" required>
+                </div>
+
+                <!-- Subject Field -->
+                <div class="form-group">
+                    <label for="subject" class="form-label">Subject</label>
+                    <input type="text" id="subject" name="subject" class="input-field"
+                           placeholder="What is this regarding?" required>
                 </div>
 
                 <!-- Message Field -->
-                <div class="content">
+                <div class="form-group">
                     <label for="message" class="form-label">Your Message</label>
-                    <textarea id="message" name="message" class="input-field" placeholder="Write your message here"
-                        rows="4" required></textarea>
+                    <textarea id="message" name="message" class="input-field"
+                              placeholder="Tell us how we can help you..." rows="5" required></textarea>
                 </div>
 
                 <!-- Submit Button -->
-                <div class="content">
-                    <button type="submit" class="submit-button">Send Message</button>
+                <div class="form-group">
+                    <button type="submit" class="submit-button">
+                        <span class="button-text">Send Message</span>
+                        <span class="button-loading" style="display: none;">
+                            <i class="fas fa-spinner fa-spin"></i> Sending...
+                        </span>
+                    </button>
                 </div>
             </form>
         </div>
     </section>
 
-    <!-- Scroll Button -->
-    <div class="scroll-hint">
-        <a href="javascript:void(0);" id="scroll-btn"></a> <!-- Prevents page reload -->
-        <div class="arrow"></div>
-    </div>
-
     <!-- Blog Post Modal -->
-    <div id="blogModal" class="modal" style="display: none;">
+    <div id="blogModal" class="modal" style="display: none;" role="dialog" aria-labelledby="modalTitle" aria-hidden="true">
         <div class="modal-article">
-            <span class="close-button">&times;</span>
+            <button class="close-button" aria-label="Close modal">&times;</button>
             <img id="modalImage" src="" alt="" class="modal-image" />
-            <h2 id="modalTitle"></h2>
-            <p class="modal-date" id="modalDate"></p>
-            <div id="modalContent">
-                <!-- Content will be injected dynamically by JS -->
+            <div>
+                <h2 id="modalTitle"></h2>
+                <p class="modal-date" id="modalDate"></p>
+                <div id="modalContent" class="modal-content">
+                    <!-- Content will be injected dynamically by JS -->
+                </div>
             </div>
         </div>
     </div>
 
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const modal = document.getElementById("blogModal");
-            const modalTitle = document.getElementById("modalTitle");
-            const modalContent = document.getElementById("modalContent");
-            const modalImage = document.getElementById("modalImage");
-            const modalDate = document.getElementById("modalDate");
-            const closeBtn = document.querySelector(".close-button");
 
-            // Loop through all the "Read more" buttons
-            document.querySelectorAll(".read-more").forEach(button => {
-                button.addEventListener("click", function () {
-                    // Set the modal's title
-                    modalTitle.textContent = this.getAttribute("data-title");
-
-                    // Set the modal's content (use innerHTML to render HTML correctly)
-                    modalContent.innerHTML = this.getAttribute("data-content");
-
-                    // Set the modal's image (grab from the current blog card)
-                    modalImage.src = this.closest(".blog-card").querySelector("img").src;
-                    modalImage.alt = this.getAttribute("data-title");
-
-                    // Set the modal's publication date (grab from the current blog card)
-                    modalDate.textContent = this.closest(".blog-card").querySelector(
-                        ".blog-date").textContent;
-
-                    // Display the modal
-                    modal.style.display = "block";
-                });
-            });
-
-            // Close the modal when the close button is clicked
-            closeBtn.onclick = function () {
-                modal.style.display = "none";
-            };
-
-            // Close the modal when clicking outside the modal content
-            window.onclick = function (event) {
-                if (event.target === modal) {
-                    modal.style.display = "none";
-                }
-            };
-        });
-    </script>
 
 </main>
 {% endblock %}

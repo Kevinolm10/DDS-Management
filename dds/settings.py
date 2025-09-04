@@ -44,14 +44,15 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    
+    'django.contrib.sitemaps',
+
     # Third-party apps
     'crispy_forms',  # For crispy forms
     'crispy_bootstrap4',  # If using Bootstrap 4 with crispy-forms
     'cloudinary',  # For Cloudinary storage
     'cloudinary_storage',  # For Cloudinary storage management
     'django_summernote',  # For Summernote (rich text editor)
-    
+
     # Your own apps
     'home',
     'blog',
@@ -63,6 +64,7 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',  # For static file serving
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -189,3 +191,59 @@ cloudinary.config(
 )
 
 X_FRAME_OPTIONS = 'SAMEORIGIN'
+
+# Email Configuration
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'  # Change this to your email provider
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'your-email@gmail.com'  # Replace with your email
+EMAIL_HOST_PASSWORD = 'your-app-password'  # Replace with your app password
+DEFAULT_FROM_EMAIL = 'DDS Management <your-email@gmail.com>'
+CONTACT_EMAIL = 'your-email@gmail.com'  # Where contact form emails will be sent
+
+# For development, you can use console backend to see emails in terminal
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+# Performance and SEO Optimizations
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+        'LOCATION': 'unique-snowflake',
+    }
+}
+
+# Security Headers
+SECURE_BROWSER_XSS_FILTER = True
+SECURE_CONTENT_TYPE_NOSNIFF = True
+X_FRAME_OPTIONS = 'DENY'
+
+# Static files optimization
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+# Session optimization
+SESSION_COOKIE_AGE = 86400  # 1 day
+SESSION_SAVE_EVERY_REQUEST = False
+
+# Database optimization
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Logging for performance monitoring
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'file': {
+            'level': 'INFO',
+            'class': 'logging.FileHandler',
+            'filename': 'django.log',
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['file'],
+            'level': 'INFO',
+            'propagate': True,
+        },
+    },
+}

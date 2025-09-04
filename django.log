@@ -1,0 +1,17 @@
+Watching for file changes with StatReloader
+"GET / HTTP/1.1" 200 42972
+"GET /static/css/style.css HTTP/1.1" 200 26412
+"GET /static/js/script.js HTTP/1.1" 200 11246
+"GET /static/img/dds-mgmt1.png HTTP/1.1" 200 58760
+"GET /static/favicon/site.webmanifest HTTP/1.1" 200 263
+"GET /static/favicon/favicon.ico HTTP/1.1" 200 15406
+"GET /static/img/test-agent.jpg HTTP/1.1" 200 507913
+"GET /static/img/6.jpg HTTP/1.1" 200 438864
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 3341
+"GET /?page=2 HTTP/1.1" 200 25832
+"GET /?page=1 HTTP/1.1" 200 43000
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 3341
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 3341
