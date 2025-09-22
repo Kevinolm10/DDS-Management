@@ -12,9 +12,13 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 from pathlib import Path
 import os
+from dotenv import load_dotenv
 import cloudinary
 import cloudinary.uploader
 import cloudinary.api
+
+# Load environment variables from .env file
+load_dotenv()
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -25,13 +29,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-$6z#_dj-hts069q^-sofao(953g0z0^*zvu1a2*7_wu#pbaf5i'
-
+SECRET_KEY = os.getenv('SECRET_KEY', 'django-insecure-fallback-key')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.getenv('DEBUG', 'True').lower() == 'true'
 
-ALLOWED_HOSTS = ['13.60.172.139', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', 'localhost,127.0.0.1').split(',') if os.getenv('ALLOWED_HOSTS') else ['localhost', '127.0.0.1']
 
 
 
@@ -98,20 +101,13 @@ WSGI_APPLICATION = 'dds.wsgi.application'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 DATABASES = {
-
     'default': {
-
         'ENGINE': 'django.db.backends.postgresql',
-
-        'NAME': 'DDS_Management',
-
-        'USER': 'ddsMgmt',
-
-        'PASSWORD': 'Sommar2025_',
-
-        'HOST': 'database-1.cvicouoam7in.eu-north-1.rds.amazonaws.com',
-
-        'PORT': '5432',
+        'NAME': os.getenv('DB_NAME', 'DDS_Management'),
+        'USER': os.getenv('DB_USER', 'ddsMgmt'),
+        'PASSWORD': os.getenv('DB_PASSWORD'),
+        'HOST': os.getenv('DB_HOST', 'localhost'),
+        'PORT': os.getenv('DB_PORT', '5432'),
     }
 }
 
@@ -177,9 +173,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 CLOUDINARY_STORAGE = {
-    'CLOUD_NAME': 'dfwppjhlw',
-    'API_KEY': '784571988896656',
-    'API_SECRET': 'rSg5u4jAn4UZDoXeQt-29oMrJm0',
+    'CLOUD_NAME': os.getenv('CLOUDINARY_CLOUD_NAME'),
+    'API_KEY': os.getenv('CLOUDINARY_API_KEY'),
+    'API_SECRET': os.getenv('CLOUDINARY_API_SECRET'),
 }
 
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
@@ -194,16 +190,20 @@ X_FRAME_OPTIONS = 'SAMEORIGIN'
 
 # Email Configuration
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'  # Change this to your email provider
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'your-email@gmail.com'  # Replace with your email
-EMAIL_HOST_PASSWORD = 'your-app-password'  # Replace with your app password
-DEFAULT_FROM_EMAIL = 'DDS Management <your-email@gmail.com>'
-CONTACT_EMAIL = 'your-email@gmail.com'  # Where contact form emails will be sent
 
-# For development, you can use console backend to see emails in terminal
-# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+# Try different OneMail SMTP settings
+# Email Configuration from environment variables
+EMAIL_HOST = os.getenv('EMAIL_HOST', 'send.one.com')
+EMAIL_PORT = int(os.getenv('EMAIL_PORT', '587'))
+EMAIL_USE_TLS = os.getenv('EMAIL_USE_TLS', 'True').lower() == 'true'
+EMAIL_USE_SSL = os.getenv('EMAIL_USE_SSL', 'False').lower() == 'true'
+EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
+DEFAULT_FROM_EMAIL = os.getenv('DEFAULT_FROM_EMAIL', f'DDS Management <{os.getenv("EMAIL_HOST_USER")}>')
+CONTACT_EMAIL = os.getenv('CONTACT_EMAIL')
+
+# OPTION 2: If you want to use Gmail, you need a Gmail address
 
 # Performance and SEO Optimizations
 CACHES = {

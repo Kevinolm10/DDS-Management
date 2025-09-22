@@ -17,15 +17,7 @@ const passiveSupported = (() => {
 })();
 
 document.addEventListener('DOMContentLoaded', () => {
-    // Loading screen
-    const loadingScreen = document.getElementById('loading-screen');
 
-    // Hide loading screen after page loads
-    window.addEventListener('load', () => {
-        setTimeout(() => {
-            loadingScreen.classList.add('hidden');
-        }, 500);
-    });
 
     // Header scroll effect with throttling for better performance
     const header = document.querySelector('.header');
