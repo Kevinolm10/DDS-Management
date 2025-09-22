@@ -190,25 +190,112 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Contact form handling
+    // Toast notification system
+    function showToast(message, type = 'success') {
+        const toastContainer = document.getElementById('toast-container');
+        if (!toastContainer) return;
+
+        const toast = document.createElement('div');
+        toast.className = `toast ${type}`;
+
+        const icon = type === 'success' ? '✓' : '✕';
+
+        toast.innerHTML = `
+            <div class="toast-content">
+                <span class="toast-icon">${icon}</span>
+                <p class="toast-message">${message}</p>
+                <button class="toast-close" aria-label="Close notification">&times;</button>
+            </div>
+            <div class="toast-progress"></div>
+        `;
+
+        toastContainer.appendChild(toast);
+
+        // Show toast with animation
+        setTimeout(() => toast.classList.add('show'), 100);
+
+        // Auto hide after 5 seconds
+        const autoHideTimer = setTimeout(() => hideToast(toast), 5000);
+
+        // Manual close button
+        const closeBtn = toast.querySelector('.toast-close');
+        closeBtn.addEventListener('click', () => {
+            clearTimeout(autoHideTimer);
+            hideToast(toast);
+        });
+
+        function hideToast(toastElement) {
+            toastElement.classList.add('hide');
+            setTimeout(() => {
+                if (toastElement.parentNode) {
+                    toastElement.parentNode.removeChild(toastElement);
+                }
+            }, 400);
+        }
+    }
+
+    // Contact form handling with AJAX
     const contactForm = document.getElementById("contact-form");
     if (contactForm) {
         contactForm.addEventListener("submit", function (e) {
+            e.preventDefault(); // Prevent default form submission
+            e.stopPropagation(); // Stop event bubbling
+
+            console.log('Form submission intercepted'); // Debug log
+
             const submitButton = this.querySelector(".submit-button");
             const buttonText = submitButton.querySelector(".button-text");
             const buttonLoading = submitButton.querySelector(".button-loading");
+            const formData = new FormData(this);
 
             // Show loading state
             buttonText.style.display = "none";
             buttonLoading.style.display = "inline-flex";
             submitButton.disabled = true;
 
-            // Reset after 3 seconds (you'll replace this with actual form submission)
-            setTimeout(() => {
+            // Submit form via AJAX
+            fetch(this.action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest',
+                    'X-CSRFToken': formData.get('csrfmiddlewaretoken')
+                }
+            })
+            .then(response => {
+                console.log('Response received:', response.status); // Debug log
+                return response.json();
+            })
+            .then(data => {
+                console.log('Data received:', data); // Debug log
+                if (data.success) {
+                    showToast(data.message, 'success');
+                    this.reset(); // Clear the form
+
+                    // Scroll to top of contact section smoothly to show the toast
+                    const contactSection = document.getElementById('contact-us');
+                    if (contactSection) {
+                        contactSection.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                } else {
+                    showToast(data.message, 'error');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                showToast('Something went wrong. Please try again later.', 'error');
+            })
+            .finally(() => {
+                // Reset button state
                 buttonText.style.display = "inline";
                 buttonLoading.style.display = "none";
                 submitButton.disabled = false;
-            }, 3000);
+            });
+
+            return false; // Extra prevention of default behavior
         });
     }
 

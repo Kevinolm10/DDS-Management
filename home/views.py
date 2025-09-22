@@ -25,37 +25,66 @@ def contact_submit(request):
         subject = request.POST.get('subject')
         message = request.POST.get('message')
 
-        # Save to database
-        contact = Contact.objects.create(
-            name=name,
-            email=email,
-            subject=subject,
-            message=message
-        )
+        # Validate required fields
+        if not all([name, email, subject, message]):
+            if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+                return JsonResponse({
+                    'success': False,
+                    'message': 'Please fill in all required fields.'
+                })
+            messages.error(request, 'Please fill in all required fields.')
+            return redirect('home')
 
-        # Send email notification (optional)
         try:
-            send_mail(
-                subject=f'New Contact Form Submission: {subject}',
-                message=f'''
-                New contact form submission from {name}:
-
-                Email: {email}
-                Subject: {subject}
-
-                Message:
-                {message}
-                ''',
-                from_email=settings.DEFAULT_FROM_EMAIL,
-                recipient_list=[settings.CONTACT_EMAIL],
-                fail_silently=False,
+            # Save to database
+            contact = Contact.objects.create(
+                name=name,
+                email=email,
+                subject=subject,
+                message=message
             )
-        except Exception as e:
-            # Log the error but don't fail the form submission
-            print(f"Email sending failed: {e}")
 
-        messages.success(request, 'Thank you for your message! We will get back to you soon.')
-        return redirect('home')
+            # Send email notification (optional)
+            try:
+                send_mail(
+                    subject=f'New Contact Form Submission: {subject}',
+                    message=f'''
+                    New contact form submission from {name}:
+
+                    Email: {email}
+                    Subject: {subject}
+
+                    Message:
+                    {message}
+                    ''',
+                    from_email=settings.DEFAULT_FROM_EMAIL,
+                    recipient_list=[settings.CONTACT_EMAIL],
+                    fail_silently=False,
+                )
+            except Exception as e:
+                # Log the error but don't fail the form submission
+                print(f"Email sending failed: {e}")
+
+            # Return JSON response for AJAX requests
+            if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+                return JsonResponse({
+                    'success': True,
+                    'message': 'Thank you for your message! We will get back to you soon.'
+                })
+
+            # Fallback for non-AJAX requests
+            messages.success(request, 'Thank you for your message! We will get back to you soon.')
+            return redirect('home')
+
+        except Exception as e:
+            # Handle any database or other errors
+            if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+                return JsonResponse({
+                    'success': False,
+                    'message': 'Something went wrong. Please try again later.'
+                })
+            messages.error(request, 'Something went wrong. Please try again later.')
+            return redirect('home')
 
     return redirect('home')
 
