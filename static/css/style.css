@@ -144,7 +144,7 @@ body {
 }
 
 .navbar-brand .logo {
-    height: 60px;
+    height: 100px;
     width: auto;
     transition: transform var(--transition-base);
 }
@@ -1216,7 +1216,7 @@ a:hover {
     }
 
     .navbar-brand .logo {
-        height: 50px;
+        height: 100px;
     }
 
     .section {
@@ -1269,7 +1269,7 @@ a:hover {
     }
 
     .navbar-brand .logo {
-        height: 40px;
+        height: 80px;
     }
 
     .section {
