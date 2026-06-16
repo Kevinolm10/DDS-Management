@@ -4,19 +4,28 @@ from django.contrib import messages
 from django.core.mail import send_mail
 from django.conf import settings
 from django.http import JsonResponse, HttpResponse
-from django.views.decorators.cache import cache_page
 from django.views.decorators.http import require_GET
 from blog.models import Post
-from .models import Contact
+from .models import Contact, Players, agents
 
-@cache_page(60 * 15)  # Cache for 15 minutes
 def home(request):
-    post_list = Post.objects.filter(is_published=True).select_related('category').order_by('-created_at')
-    paginator = Paginator(post_list, 6)
-    page_number = request.GET.get('page')
-    posts = paginator.get_page(page_number)
+    agent_list = agents.objects.all().order_by('-created_at')
 
-    return render(request, 'home/home.html', {'posts': posts})
+    post_list = Post.objects.filter(is_published=True).select_related('category').order_by('-created_at')
+    post_paginator = Paginator(post_list, 6)
+    post_page_number = request.GET.get('post_page')
+    posts = post_paginator.get_page(post_page_number)
+
+    player_list = Players.objects.all().order_by('-created_at')
+    player_paginator = Paginator(player_list, 8)
+    player_page_number = request.GET.get('player_page')
+    players = player_paginator.get_page(player_page_number)
+
+    return render(request, 'home/home.html', {
+        'agents': agent_list,
+        'posts': posts,
+        'players': players
+    })
 
 def contact_submit(request):
     if request.method == 'POST':
@@ -101,3 +110,64 @@ def robots_txt(request):
         f"Sitemap: {request.build_absolute_uri('/sitemap.xml')}",
     ]
     return HttpResponse("\n".join(lines), content_type="text/plain")
+
+
+# Add players
+def add_player(request):
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        position = request.POST.get('position')
+        club = request.POST.get('club')
+        image = request.FILES.get('image')
+
+        if not all([name, position, club, image]):
+            messages.error(request, 'Please fill in all fields and upload an image.')
+            return redirect('home')
+
+        player = Players(name=name, position=position, club=club, image=image)
+        player.save()
+        messages.success(request, 'Player added successfully!')
+        return redirect('home')
+
+    return render(request, 'home/add_player.html')
+
+# Remove player
+def remove_player(request, player_id):
+    try:
+        player = Players.objects.get(player_id=player_id)
+        player.delete()
+        messages.success(request, 'Player removed successfully!')
+    except Players.DoesNotExist:
+        messages.error(request, 'Player not found.')
+    return redirect('home')
+
+# Update player
+def update_player(request, player_id):
+    try:
+        player = Players.objects.get(player_id=player_id)
+    except Players.DoesNotExist:
+        messages.error(request, 'Player not found.')
+        return redirect('home')
+
+    if request.method == 'POST':
+        player.name = request.POST.get('name')
+        player.position = request.POST.get('position')
+        player.club = request.POST.get('club')
+        image = request.FILES.get('image')
+        if image:
+            player.image = image
+        player.save()
+        messages.success(request, 'Player updated successfully!')
+        return redirect('home')
+
+    return render(request, 'home/update_player.html', {'player': player})
+
+# View player details
+def player_detail(request, player_id):
+    try:
+        player = Players.objects.get(player_id=player_id)
+    except Players.DoesNotExist:
+        messages.error(request, 'Player not found.')
+        return redirect('home')
+
+    return render(request, 'home/player_detail.html', {'player': player})

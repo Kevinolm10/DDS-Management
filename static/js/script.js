@@ -51,6 +51,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const targetId = link.getAttribute('data-target');
             const targetSection = document.getElementById(targetId);
+            const navbarCollapse = document.getElementById('navbarNav');
+            const collapseInstance = navbarCollapse && window.bootstrap
+                ? bootstrap.Collapse.getOrCreateInstance(navbarCollapse, { toggle: false })
+                : null;
 
             if (targetSection) {
                 const offsetTop = targetSection.offsetTop - headerHeight;
@@ -59,6 +63,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     top: offsetTop,
                     behavior: 'smooth'
                 });
+
+                if (collapseInstance && navbarCollapse.classList.contains('show')) {
+                    collapseInstance.hide();
+                }
             }
         });
     });

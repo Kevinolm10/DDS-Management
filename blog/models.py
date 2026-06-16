@@ -49,3 +49,10 @@ class Post(models.Model):
         """Get a clean excerpt without HTML tags"""
         from django.utils.html import strip_tags
         return strip_tags(self.content)[:word_count*5] + "..."
+
+    @property
+    def image_url(self):
+        try:
+            return self.image.url
+        except Exception:
+            return ""
