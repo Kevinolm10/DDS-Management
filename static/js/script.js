@@ -158,6 +158,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const modalDate = document.getElementById("modalDate");
     const closeBtn = document.querySelector(".close-button");
 
+    let modal_open = false;
+    const navigation_bar = document.querySelector(".navbar");
+
     // Open modal when read more button is clicked
     document.querySelectorAll(".read-more").forEach(button => {
         button.addEventListener("click", function () {
@@ -170,6 +173,8 @@ document.addEventListener('DOMContentLoaded', () => {
             modal.style.display = "block";
             modal.setAttribute("aria-hidden", "false");
             document.body.style.overflow = "hidden";
+            modal_open = true
+            navigation_bar.style.display = 'none';
         });
     });
 
@@ -178,6 +183,8 @@ document.addEventListener('DOMContentLoaded', () => {
         modal.style.display = "none";
         modal.setAttribute("aria-hidden", "true");
         document.body.style.overflow = "auto";
+        modal_open = false
+        navigation_bar.style.display = ''
     }
 
     if (closeBtn) {
