@@ -73,7 +73,7 @@ main{padding-top:100px;min-height:100vh;background:var(--c-white);position:relat
 .player-card-content h3{margin:0;font-family:var(--ff-serif);font-size:var(--fs-xl);font-weight:600;color:var(--c-white);line-height:1.2}
 .player-position{margin:0;color:rgba(255,255,255,.86);font-weight:600;font-size:var(--fs-sm);letter-spacing:.3px;text-transform:uppercase;line-height:1.5}
 .player-club{margin:0 0 var(--sp-xs);color:rgba(255,255,255,.96);font-size:var(--fs-sm);line-height:1.5}
-.player-description{padding:var(--sp-md);border-radius:var(--r-lg);background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);color:rgba(255,255,255,.96);font-size:var(--fs-sm);line-height:1.7;box-shadow:0 10px 24px rgba(0,0,0,.16);backdrop-filter:blur(8px);overflow:visible;max-height:none;overflow-wrap:anywhere;word-break:break-word;flex:1;min-height:10rem}
+.player-description{padding:var(--sp-md);border-radius:var(--r-lg);background:rgba(255,255,255,.08);color:rgba(255,255,255,.96);font-size:var(--fs-sm);line-height:1.7;box-shadow:0 10px 24px rgba(0,0,0,.16);backdrop-filter:blur(8px);overflow:visible;max-height:none;overflow-wrap:anywhere;word-break:break-word;flex:1;min-height:10rem}
 .player-description :last-child{margin-bottom:0}
 .no-players{grid-column:1/-1;background:var(--c-white);border:2px dashed var(--g-300);border-radius:var(--r-xl);padding:var(--sp-2xl);text-align:center;box-shadow:var(--sh-sm)}
 .no-players p{margin:0;color:var(--g-600);font-size:var(--fs-lg)}
