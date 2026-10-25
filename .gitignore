@@ -34,3 +34,7 @@ staticfiles/
 # OS
 .DS_Store
 Thumbs.db
+
+django.log
+nohup.out
+staticfiles/
