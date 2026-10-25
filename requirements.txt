@@ -1,0 +1,12 @@
+Django>=5.2,<5.3
+gunicorn
+psycopg[binary]
+python-dotenv
+whitenoise
+cloudinary
+django-cloudinary-storage
+django-crispy-forms
+crispy-bootstrap4
+django-summernote
+bleach
+requests
