@@ -1,21 +1,25 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}DDS Management | Premier Football Agency - Expert Player Representation{% endblock %}
+{% block title %}DDS Football Management | Premier Football Agency - Expert Player Representation{% endblock %}
 
-{% block description %}DDS Management is a premier football agency representing professional players worldwide. Expert contract negotiations, career management, and transfer services. Contact us for professional football representation.{% endblock %}
+{% block description %}DDS Football Management is a premier football agency representing professional players worldwide.
+Expert contract negotiations, career management, and transfer services. Contact us for professional football
+representation.{% endblock %}
 
-{% block keywords %}football agency, football agents, player representation, contract negotiations, football transfers, sports management, professional football, player careers, football contracts, sports agents{% endblock %}
+{% block keywords %}football agency, football agents, player representation, contract negotiations, football transfers,
+sports management, professional football, player careers, football contracts, sports agents{% endblock %}
 
-{% block og_title %}DDS Management | Premier Football Agency{% endblock %}
-{% block og_description %}Expert football player representation and career management services. Professional contract negotiations and transfer assistance.{% endblock %}
+{% block og_title %}DDS Football Management | Premier Football Agency{% endblock %}
+{% block og_description %}Expert football player representation and career management services. Professional contract
+negotiations and transfer assistance.{% endblock %}
 
 {% block structured_data %}
 <script type="application/ld+json">
 {
     "@context": "https://schema.org",
     "@type": "ProfessionalService",
-    "name": "DDS Management",
+    "name": "DDS Football Management",
     "description": "Premier football agency providing expert player representation and career management services",
     "url": "{{ request.build_absolute_uri }}",
     "logo": "{{ request.scheme }}://{{ request.get_host }}{% static 'img/dds-mgmt1.png' %}",
@@ -54,15 +58,10 @@
     "employee": [
         {
             "@type": "Person",
-            "name": "David Johnson",
-            "jobTitle": "Senior Football Agent",
-            "description": "Experienced football agent with over 15 years in the sports industry"
-        },
-        {
-            "@type": "Person",
-            "name": "Sarah Williams",
-            "jobTitle": "International Football Agent",
-            "description": "Highly respected football agent known for sharp negotiation skills"
+            "name": "Hesiodo Dias dos Santos",
+            "jobTitle": "Co-Founder, FIFA Licensed Football Agent & Scout",
+            "worksFor": "DDS Football Management",
+            "description": "Co-founder and FIFA licensed agent with a background in coaching and nearly a decade of teaching, focused on scouting for character and potential and on guiding players' career decisions."
         }
     ]
 }
@@ -71,156 +70,162 @@
 
 {% block content %}
 <main>
-<!-- Our Team Section -->
-<section id="our-team" class="section">
-    <div class="container">
+    <!-- Our Team Section -->
+    <section id="our-team" class="section">
+        <div class="container">
 
-        <div class="heading">
-            <h2>Our Team</h2>
-        </div>
+            <div class="heading">
+                <h2>Our Team</h2>
+            </div>
 
-        <div class="agents-container">
+            <div class="agents-container">
 
-            {% for agent in agents %}
-            <article class="agent" itemscope itemtype="https://schema.org/Person">
-                <div class="agent-info">
-                    {% if agent.image_url %}
-                    <img src="{{ agent.image_url }}"
-                         alt="{{ agent.name }} – {{ agent.position }} at DDS Management"
-                         itemprop="image"
-                         loading="lazy">
-                    {% endif %}
-                    <h3 itemprop="name">{{ agent.name }}</h3>
-                    <p class="agent-title">{{ agent.position }}</p>
-                    <div class="agent-description" itemprop="description">
-                        {{ agent.description|safe }}
+                {% for agent in agents %}
+                <article class="agent" itemscope itemtype="https://schema.org/Person">
+                    <div class="agent-info">
+                        {% if agent.image_url %}
+                        <img src="{{ agent.image_url }}"
+                            alt="{{ agent.name }} – {{ agent.position }} at DDS Football Management" itemprop="image"
+                            loading="lazy">
+                        {% endif %}
+                        <h3 itemprop="name">{{ agent.name }}</h3>
+                        <p class="agent-title">{{ agent.position }}</p>
+                        <div class="agent-description" itemprop="description">
+                            {{ agent.description|safe }}
+                        </div>
+                        <meta itemprop="jobTitle" content="{{ agent.position }}">
+                        <meta itemprop="worksFor" content="DDS Football Management">
                     </div>
-                    <meta itemprop="jobTitle" content="{{ agent.position }}">
-                    <meta itemprop="worksFor" content="DDS Management">
-                </div>
-            </article>
-            {% empty %}
-            <p>No agents added yet.</p>
-            {% endfor %}
+                </article>
+                {% empty %}
+                <p>No agents added yet.</p>
+                {% endfor %}
 
+            </div>
         </div>
-    </div>
-</section>
-
-<section id="about" class="section">
-
-  <h2 class="about-head">About Us</h2>
-
-  <div class="about-container">
-
-    <div class="about-intro">
-      <p class="about-description">
-        DDS Football Management is a small, family-run agency operating primarily in Sweden and Angola.
-        We guide and support players throughout their entire careers, whether they are based in Europe
-        or working their way toward it.
-      </p>
-      <p class="about-description">
-        Beyond transfers and contract negotiations, we connect players with trusted experts in nutrition,
-        training, mental resilience, and physical well-being, always tailored to the individual.
-        Trust, honesty, and personal attention are at the core of everything we do.
-      </p>
-      <p class="about-description">
-        We focus on a select group of long-term clients to ensure every player gets the attention they
-        deserve, though we are open to shorter-term arrangements when that suits best. We aim to be
-        more than agents, dedicated, long-term partners in your football journey.
-      </p>
-    </div>
-
-    <section class="content-wrapper">
-      <div class="content-box">
-
-        <h3>What we stand for</h3>
-
-        <h4>Integrity &amp; Professionalism</h4>
-        <p>We act with honesty and transparency at every step. Players and partners can count on us to always put their best interests first.</p>
-
-        <h4>Long-Term Thinking</h4>
-        <p>We invest in sustainable careers, not quick wins. Our focus is on building relationships and strategies that grow over time.</p>
-
-        <h4>Individualised Support</h4>
-        <p>Every player is different. We tailor our guidance, planning, and support to each person's specific needs — on and off the pitch.</p>
-
-        <h4>Well-Being First</h4>
-        <p>Physical and mental health matter as much as performance. We partner with specialists in sports psychology, physiotherapy, and nutrition for a genuinely holistic approach.</p>
-
-        <h4>Global Network</h4>
-        <p>Strong ties with clubs, coaches, and scouting networks across the world mean we can open doors that others cannot.</p>
-
-        <h4>Passion for the Game</h4>
-        <p>Football is a dream for many. We are driven by a genuine love for the sport and work every day to help players reach their full potential.</p>
-
-      </div>
     </section>
 
-  </div>
+    <section id="about" class="section">
 
-</section>
+        <h2 class="about-head">About Us</h2>
 
+        <div class="about-container">
 
-<section id="our-players" class="section">
-    <div class="container">
-        <div class="heading">
-            <h2>Our Players</h2>
-        </div>
-        <div class="players-container">
-            {% for player in players %}
-            <article class="player-card" itemscope itemtype="https://schema.org/Person">
-                <div class="player-media">
-                    {% if player.image_url %}
-                    <img src="{{ player.image_url }}"
-                         alt="{{ player.name }} - Professional Football Player"
-                         itemprop="image"
-                         loading="lazy">
-                    {% endif %}
-                </div>
-                <div class="player-card-content">
-                    <h3 itemprop="name">{{ player.name }}</h3>
-                    <p class="player-position" itemprop="jobTitle">{{ player.position }}</p>
-                    <p class="player-club" itemprop="affiliation">{{ player.club }}</p>
-                    {% if player.description %}
-                    <div class="player-description" itemprop="description">
-                        {{ player.description|safe }}
-                    </div>
-                    {% endif %}
-                </div>
-            </article>
-            {% empty %}
-            <div class="no-players">
-                <p>No players available at the moment.</p>
+            <div class="about-intro">
+                <p class="about-description">
+                    DDS Football Management is a small, family-run agency operating primarily in Sweden and Angola.
+                    We guide and support players throughout their entire careers, whether they are based in Europe
+                    or working their way toward it.
+                </p>
+                <p class="about-description">
+                    Beyond transfers and contract negotiations, we connect players with trusted experts in nutrition,
+                    training, mental resilience, and physical well-being, always tailored to the individual.
+                    Trust, honesty, and personal attention are at the core of everything we do.
+                </p>
+                <p class="about-description">
+                    We focus on a select group of long-term clients to ensure every player gets the attention they
+                    deserve, though we are open to shorter-term arrangements when that suits best. We aim to be
+                    more than agents, dedicated, long-term partners in your football journey.
+                </p>
             </div>
-            {% endfor %}
+
+            <section class="content-wrapper">
+                <div class="content-box">
+
+                    <h3>What we stand for</h3>
+
+                    <h4>Integrity &amp; Professionalism</h4>
+                    <p>We act with honesty and transparency at every step. Players and partners can count on us to
+                        always put their best interests first.</p>
+
+                    <h4>Long-Term Thinking</h4>
+                    <p>We invest in sustainable careers, not quick wins. Our focus is on building relationships and
+                        strategies that grow over time.</p>
+
+                    <h4>Individualised Support</h4>
+                    <p>Every player is different. We tailor our guidance, planning, and support to each person's
+                        specific needs — on and off the pitch.</p>
+
+                    <h4>Well-Being First</h4>
+                    <p>Physical and mental health matter as much as performance. We partner with specialists in sports
+                        psychology, physiotherapy, and nutrition for a genuinely holistic approach.</p>
+
+                    <h4>Global Network</h4>
+                    <p>Strong ties with clubs, coaches, and scouting networks across the world mean we can open doors
+                        that others cannot.</p>
+
+                    <h4>Passion for the Game</h4>
+                    <p>Football is a dream for many. We are driven by a genuine love for the sport and work every day to
+                        help players reach their full potential.</p>
+
+                </div>
+            </section>
+
         </div>
 
-        {% if players.paginator.num_pages > 1 %}
-        <div class="pagination players-pagination">
-            {% if players.has_previous %}
-            <a href="?player_page={{ players.previous_page_number }}&post_page={{ posts.number }}#our-players" class="page-link" aria-label="Previous players page">
-                <i class="fas fa-chevron-left"></i> Previous
-            </a>
-            {% endif %}
+    </section>
 
-            {% for num in players.paginator.page_range %}
-            {% if players.number == num %}
-            <span class="current-page" aria-current="page">{{ num }}</span>
-            {% else %}
-            <a href="?player_page={{ num }}&post_page={{ posts.number }}#our-players" class="page-link" aria-label="Players page {{ num }}">{{ num }}</a>
-            {% endif %}
-            {% endfor %}
 
-            {% if players.has_next %}
-            <a href="?player_page={{ players.next_page_number }}&post_page={{ posts.number }}#our-players" class="page-link" aria-label="Next players page">
-                Next <i class="fas fa-chevron-right"></i>
-            </a>
+    <section id="our-players" class="section">
+        <div class="container">
+            <div class="heading">
+                <h2>Our Players</h2>
+            </div>
+            <div class="players-container">
+                {% for player in players %}
+                <article class="player-card" itemscope itemtype="https://schema.org/Person">
+                    <div class="player-media">
+                        {% if player.image_url %}
+                        <img src="{{ player.image_url }}" alt="{{ player.name }} - Professional Football Player"
+                            itemprop="image" loading="lazy">
+                        {% endif %}
+                    </div>
+                    <div class="player-card-content">
+                        <h3 itemprop="name">{{ player.name }}</h3>
+                        <p class="player-position" itemprop="jobTitle">{{ player.position }}</p>
+                        <p class="player-club" itemprop="affiliation">{{ player.club }}</p>
+                        {% if player.description %}
+                        <div class="player-description" itemprop="description">
+                            {{ player.description|safe }}
+                        </div>
+                        {% endif %}
+                    </div>
+                </article>
+                {% empty %}
+                <div class="no-players">
+                    <p>No players available at the moment.</p>
+                </div>
+                {% endfor %}
+            </div>
+
+            {% if players.paginator.num_pages > 1 %}
+            <div class="pagination players-pagination">
+                {% if players.has_previous %}
+                <a href="?player_page={{ players.previous_page_number }}&post_page={{ posts.number }}#our-players"
+                    class="page-link" aria-label="Previous players page">
+                    <i class="fas fa-chevron-left"></i> Previous
+                </a>
+                {% endif %}
+
+                {% for num in players.paginator.page_range %}
+                {% if players.number == num %}
+                <span class="current-page" aria-current="page">{{ num }}</span>
+                {% else %}
+                <a href="?player_page={{ num }}&post_page={{ posts.number }}#our-players" class="page-link"
+                    aria-label="Players page {{ num }}">{{ num }}</a>
+                {% endif %}
+                {% endfor %}
+
+                {% if players.has_next %}
+                <a href="?player_page={{ players.next_page_number }}&post_page={{ posts.number }}#our-players"
+                    class="page-link" aria-label="Next players page">
+                    Next <i class="fas fa-chevron-right"></i>
+                </a>
+                {% endif %}
+            </div>
             {% endif %}
         </div>
-        {% endif %}
-    </div>
-</section>
+    </section>
 
     <!-- Blog Section -->
     <section id="blog" class="section">
@@ -233,27 +238,23 @@
                     {% for post in posts %}
                     <article class="blog-card" itemscope itemtype="https://schema.org/Article">
                         {% if post.image_url %}
-                        <img src="{{ post.image_url }}"
-                            alt="{{ post.title }}"
-                            itemprop="image"
-                            loading="lazy"
-                            width="350"
-                            height="250">
+                        <img src="{{ post.image_url }}" alt="{{ post.title }}" itemprop="image" loading="lazy"
+                            width="350" height="250">
                         {% endif %}
                         <div class="blog-card-content">
                             <h3 itemprop="headline">{{ post.title }}</h3>
                             <time class="blog-date" datetime="{{ post.created_at|date:'c' }}" itemprop="datePublished">
                                 {{ post.created_at|date:"F j, Y" }}
                             </time>
-                            <p class="blog-snippet" itemprop="description">{{ post.content|truncatewords:20|striptags }}</p>
+                            <p class="blog-snippet" itemprop="description">{{ post.content|truncatewords:20|striptags }}
+                            </p>
                             <button class="read-more" data-id="{{ post.post_id }}" data-title="{{ post.title }}"
                                 data-content="{{ post.content }}" data-date="{{ post.created_at|date:'F j, Y' }}"
-                                data-image="{{ post.image_url }}"
-                                aria-label="Read more about {{ post.title }}">
+                                data-image="{{ post.image_url }}" aria-label="Read more about {{ post.title }}">
                                 Read More
                             </button>
-                            <meta itemprop="author" content="DDS Management">
-                            <meta itemprop="publisher" content="DDS Management">
+                            <meta itemprop="author" content="DDS Football Management">
+                            <meta itemprop="publisher" content="DDS Football Management">
                         </div>
                     </article>
                     {% empty %}
@@ -266,7 +267,8 @@
                 {% if posts.paginator.num_pages > 1 %}
                 <div class="pagination">
                     {% if posts.has_previous %}
-                    <a href="?post_page={{ posts.previous_page_number }}&player_page={{ players.number }}#blog" class="page-link" aria-label="Previous page">
+                    <a href="?post_page={{ posts.previous_page_number }}&player_page={{ players.number }}#blog"
+                        class="page-link" aria-label="Previous page">
                         <i class="fas fa-chevron-left"></i> Previous
                     </a>
                     {% endif %}
@@ -275,12 +277,14 @@
                     {% if posts.number == num %}
                     <span class="current-page" aria-current="page">{{ num }}</span>
                     {% else %}
-                    <a href="?post_page={{ num }}&player_page={{ players.number }}#blog" class="page-link" aria-label="Page {{ num }}">{{ num }}</a>
+                    <a href="?post_page={{ num }}&player_page={{ players.number }}#blog" class="page-link"
+                        aria-label="Page {{ num }}">{{ num }}</a>
                     {% endif %}
                     {% endfor %}
 
                     {% if posts.has_next %}
-                    <a href="?post_page={{ posts.next_page_number }}&player_page={{ players.number }}#blog" class="page-link" aria-label="Next page">
+                    <a href="?post_page={{ posts.next_page_number }}&player_page={{ players.number }}#blog"
+                        class="page-link" aria-label="Next page">
                         Next <i class="fas fa-chevron-right"></i>
                     </a>
                     {% endif %}
@@ -300,29 +304,29 @@
                 <!-- Name Field -->
                 <div class="form-group">
                     <label for="name" class="form-label">Full Name</label>
-                    <input type="text" id="name" name="name" class="input-field"
-                           placeholder="Enter your full name" required>
+                    <input type="text" id="name" name="name" class="input-field" placeholder="Enter your full name"
+                        required>
                 </div>
 
                 <!-- Email Field -->
                 <div class="form-group">
                     <label for="email" class="form-label">Email Address</label>
                     <input type="email" id="email" name="email" class="input-field"
-                           placeholder="Enter your email address" required>
+                        placeholder="Enter your email address" required>
                 </div>
 
                 <!-- Subject Field -->
                 <div class="form-group">
                     <label for="subject" class="form-label">Subject</label>
                     <input type="text" id="subject" name="subject" class="input-field"
-                           placeholder="What is this regarding?" required>
+                        placeholder="What is this regarding?" required>
                 </div>
 
                 <!-- Message Field -->
                 <div class="form-group">
                     <label for="message" class="form-label">Your Message</label>
                     <textarea id="message" name="message" class="input-field"
-                              placeholder="Tell us how we can help you..." rows="5" required></textarea>
+                        placeholder="Tell us how we can help you..." rows="5" required></textarea>
                 </div>
 
                 <!-- Submit Button -->
@@ -339,7 +343,8 @@
     </section>
 
     <!-- Blog Post Modal -->
-    <div id="blogModal" class="modal" style="display: none;" role="dialog" aria-labelledby="modalTitle" aria-hidden="true">
+    <div id="blogModal" class="modal" style="display: none;" role="dialog" aria-labelledby="modalTitle"
+        aria-hidden="true">
         <div class="modal-article">
             <button class="close-button" aria-label="Close modal">&times;</button>
             <img id="modalImage" src="" alt="" class="modal-image" />
