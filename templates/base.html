@@ -7,67 +7,74 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- SEO Meta Tags -->
-    <title>{% block title %}DDS Management | Premier Football Agency{% endblock %}</title>
-    <meta name="description" content="{% block description %}DDS Management is a leading football agency, specializing in career management, contract negotiations, and transfers for professional football players. Our expert team ensures players maximize their potential both on and off the field.{% endblock %}">
-    <meta name="keywords" content="{% block keywords %}football agency, football agents, player management, contract negotiations, football transfers, football career development, player representation, sports agent, football endorsements, athlete career management, professional football, football players{% endblock %}">
-    <meta name="author" content="DDS Management">
-    <meta name="robots" content="index, follow">
-    <meta name="language" content="English">
-    <meta name="revisit-after" content="7 days">
-    <link rel="canonical" href="{% block canonical %}{{ request.build_absolute_uri }}{% endblock %}">
+    <!-- SEO -->
+    <title>{% block title %}DDS Football Management | Football Agency & Player Representation{% endblock %}</title>
+    <meta name="description"
+        content="{% block description %}Football agency handling career management, contract negotiations and transfers for professional players.{% endblock %}">
+    <meta name="robots"
+        content="{% if is_staging %}noindex, nofollow{% else %}{% block robots %}index, follow{% endblock %}{% endif %}">
+    <link rel="canonical" href="https://ddsfootballmanagement.com{% block canonical %}{{ request.path }}{% endblock %}">
 
-    <!-- Open Graph / Facebook -->
-    <meta property="og:title" content="{% block og_title %}DDS Management | Premier Football Agency{% endblock %}">
-    <meta property="og:description" content="{% block og_description %}Leading football agency specializing in career management and contract negotiations for professional players.{% endblock %}">
-    <meta property="og:image" content="{% block og_image %}{{ request.scheme }}://{{ request.get_host }}{% static 'img/dds-mgmt1.png' %}{% endblock %}">
-    <meta property="og:url" content="{{ request.build_absolute_uri }}">
+    <!-- Open Graph -->
     <meta property="og:type" content="{% block og_type %}website{% endblock %}">
-    <meta property="og:site_name" content="DDS Management">
-    <meta property="og:locale" content="en_US">
+    <meta property="og:site_name" content="DDS Football Management">
+    <meta property="og:locale" content="en_GB">
+    <meta property="og:title" content="{% block og_title %}DDS Football Management | Football Agency{% endblock %}">
+    <meta property="og:description"
+        content="{% block og_description %}Career management, contract negotiations and transfers for professional football players.{% endblock %}">
+    <meta property="og:url" content="https://ddsfootballmanagement.com{{ request.path }}">
+    <meta property="og:image"
+        content="{% block og_image %}https://ddsfootballmanagement.com{% static 'img/dds-mgmt1.png' %}{% endblock %}">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
 
-    <!-- Twitter Card -->
+    <!-- Twitter / X: reuses the Open Graph title, description and image -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="{% block twitter_title %}DDS Management | Premier Football Agency{% endblock %}">
-    <meta name="twitter:description" content="{% block twitter_description %}Leading football agency specializing in career management and contract negotiations for professional players.{% endblock %}">
-    <meta name="twitter:image" content="{% block twitter_image %}{{ request.scheme }}://{{ request.get_host }}{% static 'img/dds-mgmt1.png' %}{% endblock %}">
-    <meta name="twitter:site" content="@DDSManagement">
-    <meta name="twitter:creator" content="@DDSManagement">
+    {# Add twitter:site with your real handle once the account exists #}
 
-    <!-- Favicon and App Icons -->
-    <link rel="shortcut icon" href="{% static 'favicon/favicon.ico' %}">
-    <link rel="icon" type="image/x-icon" href="{% static 'favicon/favicon.ico' %}">
-    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'favicon/apple-touch-icon.png' %}">
+    <!-- Icons -->
+    <link rel="icon" href="{% static 'favicon/favicon.ico' %}" sizes="any">
     <link rel="icon" type="image/png" sizes="32x32" href="{% static 'favicon/favicon-32x32.png' %}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'favicon/favicon-16x16.png' %}">
+    <link rel="apple-touch-icon" href="{% static 'favicon/apple-touch-icon.png' %}">
     <link rel="manifest" href="{% static 'favicon/site.webmanifest' %}">
     <meta name="theme-color" content="#ffffff">
 
-    <!-- Preconnect for performance -->
+    <!-- Connections -->
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
-    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
 
-    <!-- Critical CSS - Load immediately -->
-    <style>
-        /* Critical above-the-fold styles */
-        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; margin: 0; }
-        .header { position: fixed; top: 0; left: 0; right: 0; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); z-index: 1030; }
-    </style>
+    <!-- Layout CSS: loaded normally so the page never renders unstyled.
+         Add integrity="sha384-..." from jsdelivr.com/package/npm/bootstrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+        crossorigin="anonymous">
 
-    <!-- Non-critical CSS - Load asynchronously -->
-    <link rel="preload" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"></noscript>
+    <!-- Fonts: trim the weights to the ones style.css actually uses -->
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap">
 
-    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
+    <!-- Icons are not layout-critical: load async.
+         Add integrity="sha512-..." from cdnjs.com/libraries/font-awesome -->
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style"
+        crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    </noscript>
 
-    <!-- Google Fonts with font-display: swap for better performance -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
-
-    <!-- Custom CSS -->
+    <!-- Site CSS last, so it always overrides Bootstrap -->
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    <!-- Structured data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "DDS Football Management",
+        "url": "https://ddsfootballmanagement.com",
+        "logo": "https://ddsfootballmanagement.com{% static 'img/dds-mgmt1.png' %}"
+    }
+    </script>
 
     {% block extra_css %}{% endblock %}
 </head>
@@ -81,7 +88,7 @@
             <div class="container-fluid">
                 <!-- Brand Logo -->
                 <a class="navbar-brand" href="{% url 'home' %}">
-                    <img src="{% static 'img/dds-mgmt1.png' %}" alt="DDS Management Logo" class="logo">
+                    <img src="{% static 'img/dds-mgmt1.png' %}" alt="DDS Football Management Logo" class="logo">
                 </a>
 
                 <!-- Mobile Menu Toggle -->
@@ -124,8 +131,9 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-4 mb-4">
-                    <h5 class="footer-title">DDS Management</h5>
-                    <p class="footer-description">Premier football agency dedicated to maximizing player potential through expert career management and strategic partnerships.</p>
+                    <h5 class="footer-title">DDS Football Management</h5>
+                    <p class="footer-description">Premier football agency dedicated to maximizing player potential
+                        through expert career management and strategic partnerships.</p>
                 </div>
                 <div class="col-lg-4 mb-4">
                     <h5 class="footer-title">Quick Links</h5>
@@ -139,7 +147,8 @@
                 <div class="col-lg-4 mb-4">
                     <h5 class="footer-title">Follow Us</h5>
                     <div class="social-links">
-                        <a href="https://linkedin.com/in/hesiodo-dias-dos-santos-2741202b8" aria-label="Visit our LinkedIn profile" class="social-link">
+                        <a href="https://linkedin.com/in/hesiodo-dias-dos-santos-2741202b8"
+                            aria-label="Visit our LinkedIn profile" class="social-link">
                             <i class="fab fa-linkedin-in"></i>
                         </a>
                     </div>
@@ -148,7 +157,7 @@
             <hr class="footer-divider">
             <div class="row">
                 <div class="col-12 text-center">
-                    <p class="footer-copyright">&copy; {% now "Y" %} DDS Management. All rights reserved.</p>
+                    <p class="footer-copyright">&copy; {% now "Y" %} DDS Football Management. All rights reserved.</p>
                 </div>
             </div>
         </div>
@@ -171,7 +180,7 @@
     {
         "@context": "https://schema.org",
         "@type": "Organization",
-        "name": "DDS Management",
+        "name": "DDS Football Management",
         "description": "Premier football agency specializing in career management and contract negotiations for professional players",
         "url": "{{ request.build_absolute_uri }}",
         "logo": "{{ request.scheme }}://{{ request.get_host }}{% static 'img/dds-mgmt1.png' %}",
